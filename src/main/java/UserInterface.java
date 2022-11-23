@@ -7,10 +7,10 @@ public class UserInterface {
     private Scanner scanner = new Scanner(System.in);
 
     public void start(){
-        controller.registerMember("Anders Teller", 20, true); // TEST
-        controller.registerMember("Nicolai Andersson", 21, true); // TEST
-        controller.registerMember("Victor Hanert", 22, true); // TEST
-        controller.registerMember("Omar Kayed", 22, false); // TEST
+//        controller.registerMember("Anders Teller", 20, true); // TEST
+//        controller.registerMember("Nicolai Andersson", 21, true); // TEST
+//        controller.registerMember("Victor Hanert", 22, true); // TEST
+//        controller.registerMember("Omar Kayed", 22, false); // TEST
         printWelcome();
     }
 
@@ -30,8 +30,8 @@ public class UserInterface {
                     4. Rediger medlem
                     5. Udmeld medlem
                     6. Vis liste af oprettede hold
-                    7. 
-                    8.
+                    7. Load gemt data
+                    8. Gem data
                     9. Afslut program
                     """);
 
@@ -57,9 +57,10 @@ public class UserInterface {
             case 1 -> registerMember();
             case 2 -> printMembers();
             case 3 -> searchForMember();
+            case 7 -> loadData();
+            case 8 -> saveData();
         }
     }
-
 
     private void registerMember() {
 
@@ -154,6 +155,20 @@ public class UserInterface {
             }while(inputError);
         } else {
             System.out.println("Ingen relevante medlemmer med følgende søgeord!");
+        }
+    }
+
+    private void loadData() {
+        controller.loadData();
+        System.out.println("Data er nu opdateret...");
+    }
+
+    private void saveData() {
+        if (controller.isChanges()){
+            controller.saveData();
+            System.out.println("Data er gemt");
+        }else{
+            System.out.println("Data er ikke gemt, da ingen ændringer er lavet.");
         }
     }
 }
