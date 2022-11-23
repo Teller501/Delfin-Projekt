@@ -54,5 +54,47 @@ public class UserInterface {
     }
 
     private void registerMember() {
+
+        System.out.println("Registrer et medlem");
+
+        System.out.println("Indtast medlemmets fornavn: ");
+        String firstName = scanner.nextLine();
+        firstName = firstName.contains(" ") ? firstName.split(" ")[0] : firstName; // Checking if firstName contains more than one word
+
+        System.out.println("Indtast medlemmets efternavn: ");
+        String lastName = scanner.nextLine();
+
+
+        int age = 0;
+        boolean ageInputError;
+
+        do{
+            try{
+                System.out.println("Indtast medlemmets alder: ");
+                age = Integer.parseInt(scanner.nextLine());
+                ageInputError = false;
+            } catch (NumberFormatException e){
+                System.out.println("Input er ugyldigt, prøv venligst igen!");
+                ageInputError = true;
+            }
+        }while(ageInputError);
+
+        boolean isActive;
+        char activeStatus;
+
+        do {
+            System.out.println("Skal brugeren have et aktivt medlemsskab? (j / n) ");
+            activeStatus = scanner.next().charAt(0);
+            System.out.println();
+
+            if (activeStatus == 'j'){
+                isActive = true;
+            } else if (activeStatus == 'n'){
+                isActive = false;
+            } else {
+                System.out.println("Input er ugyldigt, prøv venligst igen!");
+            }
+        } while(activeStatus != 'j' && activeStatus != 'n');
+
     }
 }
