@@ -9,4 +9,8 @@ public class Database {
 
         return member;
     }
+
+    public ArrayList<Member> getMembers() {
+        return members;
+    }
 }
