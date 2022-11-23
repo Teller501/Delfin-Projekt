@@ -1,7 +1,7 @@
 public class Controller {
     Database database = new Database();
 
-    public void registerMember(String firstName, String lastName, int age, boolean isActive){
-        database.registerMember(firstName, lastName, age, isActive);
+    public void registerMember(String name, int age, boolean isActive){
+        database.registerMember(name, age, isActive);
     }
 }

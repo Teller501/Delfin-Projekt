@@ -57,12 +57,9 @@ public class UserInterface {
 
         System.out.println("Registrer et medlem");
 
-        System.out.println("Indtast medlemmets fornavn: ");
-        String firstName = scanner.nextLine();
-        firstName = firstName.contains(" ") ? firstName.split(" ")[0] : firstName; // Checking if firstName contains more than one word
+        System.out.println("Indtast medlemmets navn: ");
+        String name = scanner.nextLine();
 
-        System.out.println("Indtast medlemmets efternavn: ");
-        String lastName = scanner.nextLine();
 
 
         int age = 0;
@@ -97,6 +94,6 @@ public class UserInterface {
         } while(activeStatus != 'j' && activeStatus != 'n');
 
 
-        controller.registerMember(firstName, lastName, age, isActive);
+        controller.registerMember(name, age, isActive);
     }
 }
