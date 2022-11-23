@@ -11,7 +11,7 @@ public class Controller {
         return database.getMembers();
     }
 
-    public ArrayList<Member> getSerachResults(String searchTerm){
+    public ArrayList<Member> searchForMember(String searchTerm){
         return database.searchForMember(searchTerm);
     }
 }

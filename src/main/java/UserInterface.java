@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -55,6 +56,7 @@ public class UserInterface {
         switch(menuInput){
             case 1 -> registerMember();
             case 2 -> printMembers();
+            case 3 -> searchForMember();
         }
     }
 
@@ -116,6 +118,42 @@ public class UserInterface {
             System.out.println("Der er i øjeblikket registreret " + controller.getMembers().size() + " medlem" + (controller.getMembers().size() == 1 ? "":"mer") + " i systemet");
         }else{
             System.out.println("Der er ingen registreret medlemmer i systemet.");
+        }
+    }
+
+    private void searchForMember(){
+        System.out.println("Indtast søgeord: ");
+        String searchTerm = scanner.nextLine();
+
+        ArrayList<Member> searchResult = controller.searchForMember(searchTerm);
+
+        int index = 1;
+        if (!searchResult.isEmpty()){
+            for (Member member : searchResult){
+                System.out.println(index++ + ": " + member.getName());
+            }
+
+            System.out.println("Vælg venligst medlemmet du vil se nærmere på: ");
+            int choice = 1;
+            boolean inputError = false;
+
+            do {
+                try{
+                    choice = Integer.parseInt(scanner.nextLine());
+                    inputError = false;
+
+                    System.out.println("------------------------------------------------------");
+                    System.out.println("Navn: " + searchResult.get(choice-1).getName());
+                    System.out.println("Alder: " + searchResult.get(choice-1).getAge() + "år");
+                    System.out.println("Medlemsskab: " + (searchResult.get(choice-1).isActive()?"Aktivt" : "Passivt"));
+                    System.out.println("------------------------------------------------------");
+                }catch(IndexOutOfBoundsException | NumberFormatException e){
+                    System.out.println("Input ikkt gyldigt, prøv venligst igen!");
+                    inputError = true;
+                }
+            }while(inputError);
+        } else {
+            System.out.println("Ingen relevante medlemmer med følgende søgeord!");
         }
     }
 }
