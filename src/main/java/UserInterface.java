@@ -20,10 +20,10 @@ public class UserInterface {
                     Velkommen til Delfinen Svømmeklub!
                     
                     1. Registrer nyt medlem
-                    2. Søg efter medlem
-                    3. Rediger medlem
-                    4. Udmeld medlem
-                    5. Vis liste af oprettede medlemmer
+                    2. Vis liste af oprettede medlemmer
+                    3. Søg efter medlem
+                    4. Rediger medlem
+                    5. Udmeld medlem
                     6. Vis liste af oprettede hold
                     7. 
                     8.
@@ -50,8 +50,10 @@ public class UserInterface {
     private void handleUserInput(int menuInput) {
         switch(menuInput){
             case 1 -> registerMember();
+            case 2 -> printMembers();
         }
     }
+
 
     private void registerMember() {
 
@@ -95,5 +97,13 @@ public class UserInterface {
 
 
         controller.registerMember(name, age, isActive);
+    }
+
+    private void printMembers() {
+        for (Member member : controller.getMembers()){
+            System.out.println("Navn: " + member.getName());
+            System.out.println("Alder: " + member.getAge());
+            System.out.println("Medlemsskab: " + (member.isActive()?"Aktivt":"Passivt"));
+        }
     }
 }

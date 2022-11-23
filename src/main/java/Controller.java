@@ -10,4 +10,8 @@ public class Controller {
     public ArrayList<Member> getMembers(){
         return database.getMembers();
     }
+
+    public ArrayList<Member> getSerachResults(String searchTerm){
+        return database.searchForMember(searchTerm);
+    }
 }
