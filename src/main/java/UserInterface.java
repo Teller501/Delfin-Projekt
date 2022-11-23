@@ -6,6 +6,10 @@ public class UserInterface {
     private Scanner scanner = new Scanner(System.in);
 
     public void start(){
+        controller.registerMember("Anders Teller", 20, true); // TEST
+        controller.registerMember("Nicolai Andersson", 21, true); // TEST
+        controller.registerMember("Victor Hanert", 22, true); // TEST
+        controller.registerMember("Omar Kayed", 22, false); // TEST
         printWelcome();
     }
 
@@ -100,10 +104,18 @@ public class UserInterface {
     }
 
     private void printMembers() {
-        for (Member member : controller.getMembers()){
-            System.out.println("Navn: " + member.getName());
-            System.out.println("Alder: " + member.getAge());
-            System.out.println("Medlemsskab: " + (member.isActive()?"Aktivt":"Passivt"));
+        if (!controller.getMembers().isEmpty()){
+            System.out.println("------------------------------------------------------");
+            for (Member member : controller.getMembers()){
+                System.out.println("Navn: " + member.getName());
+                System.out.println("Alder: " + member.getAge() + " år");
+                System.out.println("Medlemsskab: " + (member.isActive()?"Aktivt":"Passivt"));
+                System.out.println("------------------------------------------------------");
+            }
+
+            System.out.println("Der er i øjeblikket registreret " + controller.getMembers().size() + " medlem" + (controller.getMembers().size() == 1 ? "":"mer") + " i systemet");
+        }else{
+            System.out.println("Der er ingen registreret medlemmer i systemet.");
         }
     }
 }

@@ -15,7 +15,7 @@ class ControllerTest {
     @Test
     void registerOneMember(){
         //arrange
-        controller.registerMember("Anders", "Teller", 20, true);
+        controller.registerMember("Anders Teller", 20, true);
 
         int expected = 1;
 
@@ -29,10 +29,10 @@ class ControllerTest {
     @Test
     void registerMultipleMembers(){
         //arrange
-        controller.registerMember("Anders", "Teller", 20, true);
-        controller.registerMember("Nicolai", "Andersson", 21, true);
-        controller.registerMember("Victor", "Hanert", 22, true);
-        controller.registerMember("Omar", "Kayed", 22, true);
+        controller.registerMember("Anders Teller", 20, true);
+        controller.registerMember("Nicolai Andersson", 21, true);
+        controller.registerMember("Victor Hanert", 22, true);
+        controller.registerMember("Omar Kayed", 22, true);
 
         int expected = 4;
 
