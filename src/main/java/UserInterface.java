@@ -79,7 +79,7 @@ public class UserInterface {
             }
         }while(ageInputError);
 
-        boolean isActive;
+        boolean isActive = true;
         char activeStatus;
 
         do {
@@ -96,5 +96,7 @@ public class UserInterface {
             }
         } while(activeStatus != 'j' && activeStatus != 'n');
 
+
+        controller.registerMember(firstName, lastName, age, isActive);
     }
 }
