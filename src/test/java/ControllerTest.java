@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerTest {
@@ -55,4 +57,33 @@ class ControllerTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void searchOneMember(){
+        //arrange
+        controller.registerMember("Michael Phelps", 37, false);
+        ArrayList<Member> results = controller.searchForMember("Michael");
+        int expected = 1;
+
+        //act
+        int actual = results.size();
+
+        //assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void searchMultipleMembers(){
+        //arrange
+        controller.registerMember("Michael Phelps", 37, false);
+        controller.registerMember("Bjarne Phelps", 69, true);
+        controller.registerMember("Jobbe Phelps", 22, true);
+        ArrayList<Member> results = controller.searchForMember("Phelps");
+        int expected = 3;
+
+        //act
+        int actual = results.size();
+
+        //assert
+        assertEquals(expected,actual);
+    }
 }
