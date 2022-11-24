@@ -10,12 +10,12 @@ class ControllerTest {
     private Controller controller;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         controller = new Controller();
     }
 
     @Test
-    void registerOneMember(){
+    void registerOneMember() {
         //arrange
         controller.registerMember("Anders Teller", 20, true);
 
@@ -29,7 +29,7 @@ class ControllerTest {
     }
 
     @Test
-    void registerMultipleMembers(){
+    void registerMultipleMembers() {
         //arrange
         controller.registerMember("Anders Teller", 20, true);
         controller.registerMember("Nicolai Andersson", 21, true);
@@ -46,7 +46,7 @@ class ControllerTest {
     }
 
     @Test
-    void registerZeroMembers(){
+    void registerZeroMembers() {
         //arrange
         int expected = 0;
 
@@ -58,7 +58,7 @@ class ControllerTest {
     }
 
     @Test
-    void searchOneMember(){
+    void searchOneMember() {
         //arrange
         controller.registerMember("Michael Phelps", 37, false);
         ArrayList<Member> results = controller.searchForMember("Michael");
@@ -68,11 +68,11 @@ class ControllerTest {
         int actual = results.size();
 
         //assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    void searchMultipleMembers(){
+    void searchMultipleMembers() {
         //arrange
         controller.registerMember("Michael Phelps", 37, false);
         controller.registerMember("Bjarne Phelps", 69, true);
@@ -84,11 +84,11 @@ class ControllerTest {
         int actual = results.size();
 
         //assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    void deleteMember(){
+    void deleteMember() {
         //arrange
         controller.registerMember("Michael Phelps", 37, false);
         controller.registerMember("Bjarne Phelps", 69, true);
@@ -100,7 +100,7 @@ class ControllerTest {
         //act
         boolean actualResult = controller.database.deleteMember(member);
         boolean expectedResult = true;
-        assertEquals(expectedResult,actualResult);
+        assertEquals(expectedResult, actualResult);
         ArrayList<Member> resultsAfterDelete = controller.getMembers();
         int actualSize = resultsAfterDelete.size();
 

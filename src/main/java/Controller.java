@@ -6,15 +6,15 @@ public class Controller {
     Database database = new Database();
     Filehandler fileHandler = new Filehandler();
 
-    public void registerMember(String name, int age, boolean isActive){
+    public void registerMember(String name, int age, boolean isActive) {
         database.registerMember(name, age, isActive);
     }
 
-    public ArrayList<Member> getMembers(){
+    public ArrayList<Member> getMembers() {
         return database.getMembers();
     }
 
-    public ArrayList<Member> searchForMember(String searchTerm){
+    public ArrayList<Member> searchForMember(String searchTerm) {
         return database.searchForMember(searchTerm);
     }
 
@@ -22,8 +22,7 @@ public class Controller {
     public void saveData() {
         try {
             fileHandler.saveData(database.getMembers());
-        }
-        catch (FileNotFoundException e) { // if the file does not exist
+        } catch (FileNotFoundException e) { // if the file does not exist
             System.out.println("Filen findes ikke...");
         }
     }
@@ -40,7 +39,8 @@ public class Controller {
     public void deleteMember(Member deleteMember) {
         database.deleteMember(deleteMember);
     }
-    public boolean isChanges(){
+
+    public boolean isChanges() {
         return database.isChanges();
     }
 }

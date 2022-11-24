@@ -30,7 +30,7 @@ public class Filehandler {
 
         Scanner reader = new Scanner(new File("data/members.csv"));
 
-        while(reader.hasNextLine()) {
+        while (reader.hasNextLine()) {
             String line = reader.nextLine();
 
             Member dataObjekt = parseCSVLine(line);
@@ -41,7 +41,7 @@ public class Filehandler {
     }
 
     private Member parseCSVLine(String line) {
-        try{
+        try {
             String[] parts = line.split(";");
 
             Member dataObjekt = new Member();
@@ -49,8 +49,7 @@ public class Filehandler {
             dataObjekt.setAge(Integer.parseInt(parts[1]));
             dataObjekt.setActive(Boolean.parseBoolean(parts[2]));
             return dataObjekt;
-        }
-        catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("Kan ikke loade data, fejl i input");
             return null;
         }

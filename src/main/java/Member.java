@@ -4,13 +4,13 @@ public class Member {
     private int age;
     private boolean isActive;
 
-    public Member(String name, int age, boolean isActive){
+    public Member(String name, int age, boolean isActive) {
         this.name = name;
         this.age = age;
         this.isActive = isActive;
     }
 
-    public Member(){
+    public Member() {
         // Empty for loading data
     }
 
