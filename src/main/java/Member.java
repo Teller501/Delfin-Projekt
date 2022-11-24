@@ -3,10 +3,13 @@ public class Member {
     private String name;
     private int age;
     private boolean isActive;
+    private int phoneNumber;
 
-    public Member(String name, int age, boolean isActive){
+
+    public Member(String name, int age, int phoneNumber, boolean isActive){
         this.name = name;
         this.age = age;
+        this.phoneNumber = phoneNumber;
         this.isActive = isActive;
     }
 
@@ -29,6 +32,9 @@ public class Member {
         return isActive;
     }
 
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
 
     // Setters for attributes
     public void setName(String name) {
@@ -43,4 +49,7 @@ public class Member {
         isActive = active;
     }
 
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }

@@ -6,8 +6,8 @@ public class Controller {
     Database database = new Database();
     Filehandler fileHandler = new Filehandler();
 
-    public void registerMember(String name, int age, boolean isActive){
-        database.registerMember(name, age, isActive);
+    public void registerMember(String name, int age, int phoneNumber, boolean isActive){
+        database.registerMember(name, age, phoneNumber, isActive);
     }
 
     public ArrayList<Member> getMembers(){
@@ -39,5 +39,9 @@ public class Controller {
 
     public boolean isChanges(){
         return database.isChanges();
+    }
+
+    public void setChanges(boolean changes){
+        database.setChanges(changes);
     }
 }

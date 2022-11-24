@@ -82,6 +82,32 @@ public class UserInterface {
             }
         }while(ageInputError);
 
+
+        // When typing a phonenumber, it checks if the number is 8 digits (danish number)
+        String phoneNumberInput = "";
+        int phoneNumber = 0;
+        boolean phoneNumberInputError;
+
+        do{
+            try{
+                System.out.println("Indtast medlemmets telefonnr: ");
+                phoneNumberInput = scanner.nextLine();
+
+                if (phoneNumberInput.length() == 8){
+                    phoneNumber = Integer.parseInt(phoneNumberInput);
+                    phoneNumberInputError = false;
+                }else {
+                    System.out.println("Du skal indtaste 8 cifre! ");
+                    phoneNumberInputError = true;
+                }
+
+            } catch (NumberFormatException e){
+                System.out.println("Input er ugyldigt, prøv venligst igen!");
+                phoneNumberInputError = true;
+            }
+        }while(phoneNumberInputError);
+
+        // Checking if the right word is typed when asked about membership status
         boolean isActive = true;
         char activeStatus;
 
@@ -100,7 +126,7 @@ public class UserInterface {
         } while(activeStatus != 'j' && activeStatus != 'n');
 
 
-        controller.registerMember(name, age, isActive);
+        controller.registerMember(name, age, phoneNumber, isActive);
     }
 
     private void printMembers() {
@@ -169,7 +195,8 @@ public class UserInterface {
         }
     }
 
-    public void editMember() {
+    private void editMember() {
+
         System.out.println("Indtast søgeord: ");
         String searchTerm = scanner.nextLine();
 
@@ -202,10 +229,18 @@ public class UserInterface {
             }
 
             System.out.println("Alder: " + editMember.getAge());
-            String newAge = scanner.nextLine();
-            if (!newAge.isEmpty()) {
-                editMember.setAge(Integer.parseInt(newAge));
-            }
+            do {
+                try{
+                    String newAge = scanner.nextLine();
+                    if (!newAge.isEmpty()) {
+                        editMember.setAge(Integer.parseInt(newAge));
+                    }
+                    inputError = false;
+                }catch (NumberFormatException e){
+                    System.out.println("Indtast venligst et tal!");
+                    inputError = true;
+                }
+            }while(inputError);
 
             System.out.println("Medlemsskabsstatus: " + (editMember.isActive()?"Aktivt":"Passivt"));
             char activeStatus;
@@ -226,5 +261,6 @@ public class UserInterface {
 
 
         }
+            controller.setChanges(true);
     }
 }

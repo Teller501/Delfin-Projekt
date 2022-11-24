@@ -17,7 +17,7 @@ class ControllerTest {
     @Test
     void registerOneMember(){
         //arrange
-        controller.registerMember("Anders Teller", 20, true);
+        controller.registerMember("Anders Teller", 20, 61123452, true);
 
         int expected = 1;
 
@@ -31,10 +31,10 @@ class ControllerTest {
     @Test
     void registerMultipleMembers(){
         //arrange
-        controller.registerMember("Anders Teller", 20, true);
-        controller.registerMember("Nicolai Andersson", 21, true);
-        controller.registerMember("Victor Hanert", 22, true);
-        controller.registerMember("Omar Kayed", 22, true);
+        controller.registerMember("Anders Teller", 20, 61123452, true);
+        controller.registerMember("Nicolai Andersson", 21, 61123452, true);
+        controller.registerMember("Victor Hanert", 22, 61123452, true);
+        controller.registerMember("Omar Kayed", 22, 61123452, true);
 
         int expected = 4;
 
@@ -60,7 +60,7 @@ class ControllerTest {
     @Test
     void searchOneMember(){
         //arrange
-        controller.registerMember("Michael Phelps", 37, false);
+        controller.registerMember("Michael Phelps", 37, 61123452, false);
         ArrayList<Member> results = controller.searchForMember("Michael");
         int expected = 1;
 
@@ -74,9 +74,9 @@ class ControllerTest {
     @Test
     void searchMultipleMembers(){
         //arrange
-        controller.registerMember("Michael Phelps", 37, false);
-        controller.registerMember("Bjarne Phelps", 69, true);
-        controller.registerMember("Jobbe Phelps", 22, true);
+        controller.registerMember("Michael Phelps", 37, 61123452, false);
+        controller.registerMember("Bjarne Phelps", 69, 61123452, true);
+        controller.registerMember("Jobbe Phelps", 22, 61123452, true);
         ArrayList<Member> results = controller.searchForMember("Phelps");
         int expected = 3;
 
