@@ -20,7 +20,7 @@ class DatabaseTest {
 
     @Test
     void registerOneMember() {
-        //Arrange
+        //arrange
         ArrayList<Member> results = new ArrayList<>();
 
         Member m = database.registerMember("Michael Phelps", 37, true);
@@ -36,17 +36,43 @@ class DatabaseTest {
 
     }
 
-
     @Test
     void getMembers() {
     }
 
     @Test
     void searchForMember() {
+        //arrange
+        ArrayList<Member> results = database.searchForMember("Victor");
+        int expected = 1;
+
+        //act
+        int actual = results.size();
+
+        //assert
+        assertEquals(expected,actual);
+
     }
 
     @Test
     void deleteMember() {
+        //arrange
+        database.registerMember("Michael Phelps", 37, false);
+        database.registerMember("Bjarne Phelps", 69, true);
+        database.registerMember("Jobbe Phelps", 22, true);
+        ArrayList<Member> results = database.getMembers();
+        Member member = results.get(0);
+        int expectedSize = results.size() - 1;
+
+        //act
+        boolean actualResult = database.deleteMember(member);
+        boolean expectedResult = true;
+        assertEquals(expectedResult, actualResult);
+        ArrayList<Member> resultsAfterDelete = database.getMembers();
+        int actualSize = resultsAfterDelete.size();
+
+        //assert
+        assertEquals(expectedSize, actualSize);
     }
 
     @Test
