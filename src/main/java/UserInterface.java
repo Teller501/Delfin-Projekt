@@ -7,10 +7,6 @@ public class UserInterface {
     private Scanner scanner = new Scanner(System.in);
 
     public void start(){
-//        controller.registerMember("Anders Teller", 20, true); // TEST
-//        controller.registerMember("Nicolai Andersson", 21, true); // TEST
-//        controller.registerMember("Victor Hanert", 22, true); // TEST
-//        controller.registerMember("Omar Kayed", 22, false); // TEST
         printWelcome();
     }
 
@@ -57,6 +53,7 @@ public class UserInterface {
             case 1 -> registerMember();
             case 2 -> printMembers();
             case 3 -> searchForMember();
+            case 4 -> editMember();
             case 7 -> loadData();
             case 8 -> saveData();
         }
@@ -169,6 +166,65 @@ public class UserInterface {
             System.out.println("Data er gemt");
         }else{
             System.out.println("Data er ikke gemt, da ingen ændringer er lavet.");
+        }
+    }
+
+    public void editMember() {
+        System.out.println("Indtast søgeord: ");
+        String searchTerm = scanner.nextLine();
+
+        ArrayList<Member> searchResults = controller.searchForMember(searchTerm);
+
+        if (searchResults.isEmpty()) {
+            System.out.println("Ingen fundet");
+        } else {
+            int index = 1;
+            for (Member searchResult : searchResults) {
+                System.out.println(index++ + ": " + searchResult.getName());
+            }
+
+            System.out.println("Vælg den svømmer som du gerne vil redigere: ");
+
+            int memberChoice = 1;
+            boolean inputError = false;
+            memberChoice = Integer.parseInt(scanner.nextLine());
+            Member editMember = searchResults.get(memberChoice - 1);
+            System.out.println("Redigere: " + editMember.getName());
+
+            System.out.println("------------------------------------");
+
+            System.out.println("Indtast data der skal ændres og klik ENTER. Skal data ikke ændres, klik blot ENTER.");
+
+            System.out.println("Fornavn: " + editMember.getName());
+            String newName = scanner.nextLine();
+            if (!newName.isEmpty()) {
+                editMember.setName(newName);
+            }
+
+            System.out.println("Alder: " + editMember.getAge());
+            String newAge = scanner.nextLine();
+            if (!newAge.isEmpty()) {
+                editMember.setAge(Integer.parseInt(newAge));
+            }
+
+            System.out.println("Medlemsskabsstatus: " + (editMember.isActive()?"Aktivt":"Passivt"));
+            char activeStatus;
+
+            do {
+                System.out.println("Skal brugeren have et aktivt medlemsskab? (j / n) ");
+                activeStatus = scanner.next().charAt(0);
+                System.out.println();
+
+                if (activeStatus == 'j'){
+                    editMember.setActive(true);
+                } else if (activeStatus == 'n'){
+                    editMember.setActive(false);
+                } else {
+                    System.out.println("Input er ugyldigt, prøv venligst igen!");
+                }
+            } while(activeStatus != 'j' && activeStatus != 'n');
+
+
         }
     }
 }
