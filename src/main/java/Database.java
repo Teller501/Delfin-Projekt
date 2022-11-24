@@ -28,7 +28,13 @@ public class Database {
 
         return searchResults;
     }
+    public boolean deleteMember(Member member) {
 
+        getMembers().remove(member);
+        boolean success = true;
+        changes = true;
+        return success;
+    }
     public boolean isChanges() {
         return changes;
     }

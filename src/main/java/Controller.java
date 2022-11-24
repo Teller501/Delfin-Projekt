@@ -37,6 +37,9 @@ public class Controller {
         }
     }
 
+    public void deleteMember(Member deleteMember) {
+        database.deleteMember(deleteMember);
+    }
     public boolean isChanges(){
         return database.isChanges();
     }

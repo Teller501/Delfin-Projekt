@@ -54,6 +54,7 @@ public class UserInterface {
             case 2 -> printMembers();
             case 3 -> searchForMember();
             case 4 -> editMember();
+            case 5 -> deleteMember();
             case 7 -> loadData();
             case 8 -> saveData();
         }
@@ -224,6 +225,39 @@ public class UserInterface {
                 }
             } while(activeStatus != 'j' && activeStatus != 'n');
 
+
+        }
+    }
+    public void deleteMember() {
+        System.out.println("------------------------------------");
+        System.out.println("Indtast søgeord: ");
+        String searchTerm = scanner.nextLine();
+        ArrayList<Member> searchResults = controller.searchForMember(searchTerm);
+
+        if (searchResults.isEmpty()) {
+            System.out.println("Ingen fundet");
+        } else {
+            int index = 1;
+            for (Member searchResult : searchResults) {
+                System.out.println(index++ + ": " + searchResult.getName());
+            }
+
+            System.out.println("Vælg medlemmet du vil slette: ");
+            int memberChoice = 1;
+            boolean inputError = false;
+            do {
+                try {
+                    memberChoice = Integer.parseInt(scanner.nextLine());
+                    Member deleteMember = searchResults.get(memberChoice - 1);
+
+                    controller.deleteMember(deleteMember);
+                    System.out.println(deleteMember.getName() + " er slettet fra databasen");
+                    inputError = false;
+                } catch (NumberFormatException e) {
+                    System.out.println("Ugyldigt input, indtast venligst tallet på medlemmet du ønsker slettet.");
+                    inputError = true;
+                }
+            } while (inputError);
 
         }
     }

@@ -86,4 +86,25 @@ class ControllerTest {
         //assert
         assertEquals(expected,actual);
     }
+
+    @Test
+    void deleteMember(){
+        //arrange
+        controller.registerMember("Michael Phelps", 37, false);
+        controller.registerMember("Bjarne Phelps", 69, true);
+        controller.registerMember("Jobbe Phelps", 22, true);
+        ArrayList<Member> results = controller.getMembers();
+        Member member = results.get(0);
+        int expectedSize = results.size() - 1;
+
+        //act
+        boolean actualResult = controller.database.deleteMember(member);
+        boolean expectedResult = true;
+        assertEquals(expectedResult,actualResult);
+        ArrayList<Member> resultsAfterDelete = controller.getMembers();
+        int actualSize = resultsAfterDelete.size();
+
+        //assert
+        assertEquals(expectedSize, actualSize);
+    }
 }
