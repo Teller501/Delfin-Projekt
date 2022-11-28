@@ -39,7 +39,14 @@ public class UserInterface {
                     menuInput = scanner.nextInt();
                     scanner.nextLine();
 
-                    handleUserInput(menuInput);
+                    switch (menuInput) {
+                        case 1 -> registerMember();
+                        case 2 -> printMembers();
+                        case 3 -> searchForMember();
+                        case 4 -> editMember();
+                        case 5 -> deleteMember();
+                        case 8 -> saveData();
+                    }
                     inputError = false;
                 } catch (InputMismatchException e) {
                     System.out.println("Input er ugyldigt, prøv venligst igen!");
@@ -48,17 +55,6 @@ public class UserInterface {
                     scanner.nextLine();
                 }
             } while (inputError);
-        }
-    }
-
-    private void handleUserInput(int menuInput) {
-        switch (menuInput) {
-            case 1 -> registerMember();
-            case 2 -> printMembers();
-            case 3 -> searchForMember();
-            case 4 -> editMember();
-            case 5 -> deleteMember();
-            case 8 -> saveData();
         }
     }
 
@@ -71,18 +67,32 @@ public class UserInterface {
 
 
         LocalDate birthday = LocalDate.now();
-        boolean ageInputError;
+        boolean birthdayInputError;
 
         do {
             try {
                 System.out.println("Indtast medlemmets fødelsdato: (dd-mm-yyyy)");
                 birthday = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                ageInputError = false;
+                birthdayInputError = false;
             } catch (NumberFormatException | DateTimeParseException e) {
                 System.out.println("Ugyldig fødselsdato, prøv venligst igen!");
-                ageInputError = true;
+                birthdayInputError = true;
             }
-        } while (ageInputError);
+        } while (birthdayInputError);
+
+        LocalDate registerDate = LocalDate.now();
+        boolean registerDateInputError;
+
+        do {
+            try {
+                System.out.println("Indtast medlemmets indmeldingsdato: (dd-mm-yyyy)");
+                registerDate = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                registerDateInputError = false;
+            } catch (NumberFormatException | DateTimeParseException e) {
+                System.out.println("Ugyldig fødselsdato, prøv venligst igen!");
+                registerDateInputError = true;
+            }
+        } while (registerDateInputError);
 
 
         // When typing a phonenumber, it checks if the number is 8 digits (danish number)
@@ -128,17 +138,21 @@ public class UserInterface {
         } while (activeStatus != 'j' && activeStatus != 'n');
 
 
-        controller.registerMember(name, birthday, isActive, phoneNumber);
+        controller.registerMember(name, birthday, registerDate, isActive, phoneNumber);
     }
 
     private void printMembers() {
         if (!controller.getMembers().isEmpty()) {
             System.out.println("------------------------------------------------------");
             for (Member member : controller.getMembers()) {
+                member.calculateMemberType();
+
                 System.out.println("Navn: " + member.getName());
                 System.out.println("Fødseldag: " + member.getBirthday().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                 System.out.println("Telefon nr: " + member.getPhoneNumber());
+                System.out.println("Medlemsstype: " + (member.isJuniorSwimmer() ? "Juniorsvømmer" : "") + (member.isSeniorSwimmer() ? "Seniorsvømmer" : ""));
                 System.out.println("Medlemsskab: " + (member.isActive() ? "Aktivt" : "Passivt"));
+                System.out.println("Indmeldingsdato: " + member.getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                 System.out.println("------------------------------------------------------");
             }
 

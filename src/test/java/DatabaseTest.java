@@ -13,10 +13,10 @@ class DatabaseTest {
     public void setup() {
 
         database = new Database();
-        database.registerMember("Anders Teller", LocalDate.parse("18-08-2002"), true, 61123452);
-        database.registerMember("Nicolai Andersson", LocalDate.parse("18-08-2002"), true, 61123452);
-        database.registerMember("Victor Hanert", LocalDate.parse("18-08-2002"), true, 61123452);
-        database.registerMember("Omar Kayed", LocalDate.parse("18-08-2002"), true, 61123452);
+        database.registerMember("Anders Teller", LocalDate.parse("18-08-2002"),LocalDate.parse("18-08-2002"), true, 61123452);
+        database.registerMember("Nicolai Andersson", LocalDate.parse("18-08-2002"),LocalDate.parse("18-08-2002"), true, 61123452);
+        database.registerMember("Victor Hanert", LocalDate.parse("18-08-2002"),LocalDate.parse("18-08-2002"), true, 61123452);
+        database.registerMember("Omar Kayed", LocalDate.parse("18-08-2002"),LocalDate.parse("18-08-2002"), true, 61123452);
     }
 
     @Test
@@ -24,7 +24,7 @@ class DatabaseTest {
         //arrange
         ArrayList<Member> results = new ArrayList<>();
 
-        Member m = database.registerMember("Michael Phelps", LocalDate.parse("18-08-2002"), true, 61123452);
+        Member m = database.registerMember("Michael Phelps", LocalDate.parse("18-08-2002"),LocalDate.parse("18-08-2002"), true, 61123452);
         results.add(m);
 
         int expected = 1;
@@ -58,9 +58,9 @@ class DatabaseTest {
     @Test
     void deleteMember() {
         //arrange
-        database.registerMember("Michael Phelps", LocalDate.parse("18-08-2002"), false,61123452);
-        database.registerMember("Bjarne Phelps", LocalDate.parse("18-08-2002"), true, 61123452);
-        database.registerMember("Jobbe Phelps", LocalDate.parse("18-08-2002"), true, 61123452);
+        database.registerMember("Michael Phelps", LocalDate.parse("18-08-2002"),LocalDate.parse("18-08-2002"), false,61123452);
+        database.registerMember("Bjarne Phelps", LocalDate.parse("18-08-2002"),LocalDate.parse("18-08-2002"), true, 61123452);
+        database.registerMember("Jobbe Phelps", LocalDate.parse("18-08-2002"),LocalDate.parse("18-08-2002"), true, 61123452);
         ArrayList<Member> results = database.getMembers();
         Member member = results.get(0);
         int expectedSize = results.size() - 1;

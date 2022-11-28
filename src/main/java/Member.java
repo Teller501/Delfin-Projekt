@@ -5,14 +5,18 @@ public class Member {
 
     private String name;
     private LocalDate birthday;
+    private LocalDate registerDate;
     private boolean active;
     private int phoneNumber;
+    private boolean juniorSwimmer, seniorSwimmer;
 
-    public Member(String name, LocalDate birthday, boolean active, int phoneNumber) {
+    public Member(String name, LocalDate birthday, LocalDate registerDate, boolean active, int phoneNumber) {
         this.name = name;
         this.birthday = birthday;
+        this.registerDate = registerDate;
         this.active = active;
         this.phoneNumber = phoneNumber;
+
     }
 
     public Member() {
@@ -26,9 +30,6 @@ public class Member {
         return name;
     }
 
-//    public int getAge() {
-//        return age;
-//    }
 
     public boolean isActive() {
         return active;
@@ -40,6 +41,18 @@ public class Member {
 
     public LocalDate getBirthday() {
         return birthday;
+    }
+
+    public boolean isJuniorSwimmer() {
+        return juniorSwimmer;
+    }
+
+    public boolean isSeniorSwimmer() {
+        return seniorSwimmer;
+    }
+
+    public LocalDate getRegisterDate() {
+        return registerDate;
     }
 
     // Setters for attributes
@@ -60,9 +73,25 @@ public class Member {
         this.birthday = birthday;
     }
 
+    public void setRegisterDate(LocalDate registerDate) {
+        this.registerDate = registerDate;
+    }
+
     public int calculateAge(){
         LocalDate today = LocalDate.now();
         int age = (int) ChronoUnit.YEARS.between(birthday,today);
         return age;
     }
+
+    public void calculateMemberType(){
+        if (calculateAge() < 18){
+            juniorSwimmer = true;
+            seniorSwimmer = false;
+        }else if(calculateAge() > 60){
+            seniorSwimmer = true;
+            juniorSwimmer = false;
+        }
+    }
+
+
 }

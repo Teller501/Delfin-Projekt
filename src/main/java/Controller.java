@@ -7,8 +7,8 @@ public class Controller {
     Database database = new Database();
     Filehandler fileHandler = new Filehandler();
 
-    public void registerMember(String name, LocalDate birthday, boolean isActive, int phoneNumber) {
-        database.registerMember(name, birthday, isActive, phoneNumber);
+    public void registerMember(String name, LocalDate birthday,LocalDate registerDate , boolean isActive, int phoneNumber) {
+        database.registerMember(name, birthday, registerDate, isActive, phoneNumber);
     }
 
     public ArrayList<Member> getMembers() {

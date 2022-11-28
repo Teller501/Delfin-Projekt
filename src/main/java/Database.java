@@ -5,8 +5,8 @@ public class Database {
     private ArrayList<Member> members = new ArrayList<>();
     private boolean changes = false;
 
-    public Member registerMember(String name, LocalDate birthday, boolean isActive, int phoneNumber) {
-        Member member = new Member(name, birthday, isActive, phoneNumber);
+    public Member registerMember(String name, LocalDate birthday, LocalDate registerDate , boolean isActive, int phoneNumber) {
+        Member member = new Member(name, birthday, registerDate ,isActive, phoneNumber);
         members.add(member);
 
         changes = true;

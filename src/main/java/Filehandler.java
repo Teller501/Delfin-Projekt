@@ -15,6 +15,8 @@ public class Filehandler {
             output.print(";");
             output.print(member.getBirthday());
             output.print(";");
+            output.print(member.getRegisterDate());
+            output.print(";");
             output.print(member.getPhoneNumber());
             output.print(";");
             output.print(member.isActive());
@@ -50,8 +52,9 @@ public class Filehandler {
             Member dataObjekt = new Member();
             dataObjekt.setName(parts[0]);
             dataObjekt.setBirthday(LocalDate.parse(parts[1]));
-            dataObjekt.setPhoneNumber(Integer.parseInt(parts[2]));
-            dataObjekt.setActive(Boolean.parseBoolean(parts[3]));
+            dataObjekt.setRegisterDate(LocalDate.parse(parts[2]));
+            dataObjekt.setPhoneNumber(Integer.parseInt(parts[3]));
+            dataObjekt.setActive(Boolean.parseBoolean(parts[4]));
             return dataObjekt;
         } catch (NumberFormatException e) {
             System.out.println("Kan ikke loade data, fejl i input");
