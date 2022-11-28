@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MemberTest {
 
     @Test
-    void yearsBetween(){
+    void calculateAge(){
         LocalDate today = LocalDate.now();
         LocalDate birthday = LocalDate.parse("29-11-2002", DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
