@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ public class Filehandler {
         for (Member member : members) {
             output.print(member.getName());
             output.print(";");
-            output.print(member.getAge());
+            output.print(member.getBirthday());
             output.print(";");
             output.print(member.getPhoneNumber());
             output.print(";");
@@ -48,7 +49,7 @@ public class Filehandler {
 
             Member dataObjekt = new Member();
             dataObjekt.setName(parts[0]);
-            dataObjekt.setAge(Integer.parseInt(parts[1]));
+            dataObjekt.setBirthday(LocalDate.parse(parts[1]));
             dataObjekt.setPhoneNumber(Integer.parseInt(parts[2]));
             dataObjekt.setActive(Boolean.parseBoolean(parts[3]));
             return dataObjekt;

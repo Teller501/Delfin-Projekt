@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.FileHandler;
 
@@ -6,8 +7,8 @@ public class Controller {
     Database database = new Database();
     Filehandler fileHandler = new Filehandler();
 
-    public void registerMember(String name, int age, boolean isActive, int phoneNumber) {
-        database.registerMember(name, age, isActive, phoneNumber);
+    public void registerMember(String name, LocalDate birthday, boolean isActive, int phoneNumber) {
+        database.registerMember(name, birthday, isActive, phoneNumber);
     }
 
     public ArrayList<Member> getMembers() {

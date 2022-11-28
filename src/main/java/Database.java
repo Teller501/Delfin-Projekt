@@ -1,11 +1,12 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Database {
     private ArrayList<Member> members = new ArrayList<>();
     private boolean changes = false;
 
-    public Member registerMember(String name, int age, boolean isActive, int phoneNumber) {
-        Member member = new Member(name, age, isActive, phoneNumber);
+    public Member registerMember(String name, LocalDate birthday, boolean isActive, int phoneNumber) {
+        Member member = new Member(name, birthday, isActive, phoneNumber);
         members.add(member);
 
         changes = true;

@@ -1,13 +1,15 @@
+import java.time.LocalDate;
+
 public class Member {
 
     private String name;
-    private int age;
+    private LocalDate birthday;
     private boolean isActive;
     private int phoneNumber;
 
-    public Member(String name, int age, boolean isActive, int phoneNumber) {
+    public Member(String name, LocalDate birthday, boolean isActive, int phoneNumber) {
         this.name = name;
-        this.age = age;
+        this.birthday = birthday;
         this.isActive = isActive;
         this.phoneNumber = phoneNumber;
     }
@@ -23,9 +25,9 @@ public class Member {
         return name;
     }
 
-    public int getAge() {
-        return age;
-    }
+//    public int getAge() {
+//        return age;
+//    }
 
     public boolean isActive() {
         return isActive;
@@ -35,14 +37,15 @@ public class Member {
         return phoneNumber;
     }
 
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
     // Setters for attributes
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     public void setActive(boolean active) {
         isActive = active;
@@ -50,5 +53,9 @@ public class Member {
 
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 }

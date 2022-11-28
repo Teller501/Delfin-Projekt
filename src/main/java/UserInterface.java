@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -67,16 +70,16 @@ public class UserInterface {
         String name = scanner.nextLine();
 
 
-        int age = 0;
+        LocalDate birthday = LocalDate.now();
         boolean ageInputError;
 
         do {
             try {
-                System.out.println("Indtast medlemmets alder: ");
-                age = Integer.parseInt(scanner.nextLine());
+                System.out.println("Indtast medlemmets fødelsdato: (dd-mm-yyyy)");
+                birthday = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 ageInputError = false;
-            } catch (NumberFormatException e) {
-                System.out.println("Input er ugyldigt, prøv venligst igen!");
+            } catch (NumberFormatException | DateTimeParseException e) {
+                System.out.println("Ugyldig fødselsdato, prøv venligst igen!");
                 ageInputError = true;
             }
         } while (ageInputError);
@@ -125,7 +128,7 @@ public class UserInterface {
         } while (activeStatus != 'j' && activeStatus != 'n');
 
 
-        controller.registerMember(name, age, isActive, phoneNumber);
+        controller.registerMember(name, birthday, isActive, phoneNumber);
     }
 
     private void printMembers() {
@@ -133,7 +136,7 @@ public class UserInterface {
             System.out.println("------------------------------------------------------");
             for (Member member : controller.getMembers()) {
                 System.out.println("Navn: " + member.getName());
-                System.out.println("Alder: " + member.getAge() + " år");
+                System.out.println("Fødseldag: " + member.getBirthday().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                 System.out.println("Telefon nr: " + member.getPhoneNumber());
                 System.out.println("Medlemsskab: " + (member.isActive() ? "Aktivt" : "Passivt"));
                 System.out.println("------------------------------------------------------");
@@ -168,7 +171,7 @@ public class UserInterface {
 
                     System.out.println("------------------------------------------------------");
                     System.out.println("Navn: " + searchResult.get(choice - 1).getName());
-                    System.out.println("Alder: " + searchResult.get(choice - 1).getAge() + "år");
+                    System.out.println("Fødselsdag: " + searchResult.get(choice - 1).getBirthday() + "år");
                     System.out.println("Telefon nr: " + searchResult.get(choice - 1).getPhoneNumber());
                     System.out.println("Medlemsskab: " + (searchResult.get(choice - 1).isActive() ? "Aktivt" : "Passivt"));
                     System.out.println("------------------------------------------------------");
@@ -229,12 +232,12 @@ public class UserInterface {
                 editMember.setName(newName);
             }
 
-            System.out.println("Alder: " + editMember.getAge());
+            System.out.println("Alder: " + editMember.getBirthday());
             do {
                 try{
                     String newAge = scanner.nextLine();
                     if (!newAge.isEmpty()) {
-                        editMember.setAge(Integer.parseInt(newAge));
+                        editMember.setBirthday(LocalDate.parse(newAge));
                     }
                     inputError = false;
                 }catch (NumberFormatException e){
