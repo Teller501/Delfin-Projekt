@@ -7,6 +7,7 @@ public class UserInterface {
     private Scanner scanner = new Scanner(System.in);
 
     public void start() {
+        loadData();
         printWelcome();
     }
 
@@ -25,8 +26,7 @@ public class UserInterface {
                     3. Søg efter medlem
                     4. Rediger medlem
                     5. Udmeld medlem
-                    6. Vis liste af oprettede hold
-                    7. Load gemt data
+                    6. Hold menu (opret hold, se liste af hold)
                     8. Gem data
                     9. Afslut program
                     """);
@@ -55,7 +55,6 @@ public class UserInterface {
             case 3 -> searchForMember();
             case 4 -> editMember();
             case 5 -> deleteMember();
-            case 7 -> loadData();
             case 8 -> saveData();
         }
     }

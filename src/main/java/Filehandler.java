@@ -14,6 +14,8 @@ public class Filehandler {
             output.print(";");
             output.print(member.getAge());
             output.print(";");
+            output.print(member.getPhoneNumber());
+            output.print(";");
             output.print(member.isActive());
             output.print(";");
             output.println();
@@ -47,7 +49,8 @@ public class Filehandler {
             Member dataObjekt = new Member();
             dataObjekt.setName(parts[0]);
             dataObjekt.setAge(Integer.parseInt(parts[1]));
-            dataObjekt.setActive(Boolean.parseBoolean(parts[2]));
+            dataObjekt.setPhoneNumber(Integer.parseInt(parts[2]));
+            dataObjekt.setActive(Boolean.parseBoolean(parts[3]));
             return dataObjekt;
         } catch (NumberFormatException e) {
             System.out.println("Kan ikke loade data, fejl i input");
