@@ -6,8 +6,8 @@ public class Controller {
     Database database = new Database();
     Filehandler fileHandler = new Filehandler();
 
-    public void registerMember(String name, int age, boolean isActive) {
-        database.registerMember(name, age, isActive);
+    public void registerMember(String name, int age, boolean isActive, int phoneNumber) {
+        database.registerMember(name, age, isActive, phoneNumber);
     }
 
     public ArrayList<Member> getMembers() {

@@ -126,7 +126,7 @@ public class UserInterface {
         } while (activeStatus != 'j' && activeStatus != 'n');
 
 
-        controller.registerMember(name, age, phoneNumber, isActive);
+        controller.registerMember(name, age, isActive, phoneNumber);
     }
 
     private void printMembers() {
@@ -135,6 +135,7 @@ public class UserInterface {
             for (Member member : controller.getMembers()) {
                 System.out.println("Navn: " + member.getName());
                 System.out.println("Alder: " + member.getAge() + " år");
+                System.out.println("Telefon nr: " + member.getPhoneNumber());
                 System.out.println("Medlemsskab: " + (member.isActive() ? "Aktivt" : "Passivt"));
                 System.out.println("------------------------------------------------------");
             }
@@ -169,6 +170,7 @@ public class UserInterface {
                     System.out.println("------------------------------------------------------");
                     System.out.println("Navn: " + searchResult.get(choice - 1).getName());
                     System.out.println("Alder: " + searchResult.get(choice - 1).getAge() + "år");
+                    System.out.println("Telefon nr: " + searchResult.get(choice - 1).getPhoneNumber());
                     System.out.println("Medlemsskab: " + (searchResult.get(choice - 1).isActive() ? "Aktivt" : "Passivt"));
                     System.out.println("------------------------------------------------------");
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
@@ -261,7 +263,6 @@ public class UserInterface {
 
 
         }
-            controller.setChanges(true);
     }
 
     public void deleteMember() {
