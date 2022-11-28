@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +18,7 @@ class ControllerTest {
     @Test
     void registerOneMember() {
         //arrange
-        controller.registerMember("Anders Teller", 20, true, 61123452);
+        controller.registerMember("Anders Teller", LocalDate.parse("18-08-2002"), true, 61123452);
 
         int expected = 1;
 
@@ -31,10 +32,10 @@ class ControllerTest {
     @Test
     void registerMultipleMembers() {
         //arrange
-        controller.registerMember("Anders Teller", 20, true,61123452);
-        controller.registerMember("Nicolai Andersson", 21, true, 61123452);
-        controller.registerMember("Victor Hanert", 22, true, 61123452);
-        controller.registerMember("Omar Kayed", 22, true, 61123452);
+        controller.registerMember("Anders Teller", LocalDate.parse("18-08-2002"), true,61123452);
+        controller.registerMember("Nicolai Andersson", LocalDate.parse("18-08-2002"), true, 61123452);
+        controller.registerMember("Victor Hanert", LocalDate.parse("18-08-2002"), true, 61123452);
+        controller.registerMember("Omar Kayed", LocalDate.parse("18-08-2002"), true, 61123452);
 
         int expected = 4;
 
@@ -60,7 +61,7 @@ class ControllerTest {
     @Test
     void searchOneMember() {
         //arrange
-        controller.registerMember("Michael Phelps", 37, false, 61123452);
+        controller.registerMember("Michael Phelps", LocalDate.parse("18-08-2002"), false, 61123452);
         ArrayList<Member> results = controller.searchForMember("Michael");
         int expected = 1;
 
@@ -74,9 +75,9 @@ class ControllerTest {
     @Test
     void searchMultipleMembers() {
         //arrange
-        controller.registerMember("Michael Phelps", 37, false, 61123452);
-        controller.registerMember("Bjarne Phelps", 69, true, 61123452);
-        controller.registerMember("Jobbe Phelps", 22, true, 61123452);
+        controller.registerMember("Michael Phelps", LocalDate.parse("18-08-2002"), false, 61123452);
+        controller.registerMember("Bjarne Phelps", LocalDate.parse("18-08-2002"), true, 61123452);
+        controller.registerMember("Jobbe Phelps", LocalDate.parse("18-08-2002"), true, 61123452);
         ArrayList<Member> results = controller.searchForMember("Phelps");
         int expected = 3;
 
@@ -90,9 +91,9 @@ class ControllerTest {
     @Test
     void deleteMember() {
         //arrange
-        controller.registerMember("Michael Phelps", 37, false, 61123452);
-        controller.registerMember("Bjarne Phelps", 69, true, 61123452);
-        controller.registerMember("Jobbe Phelps", 22, true, 61123452);
+        controller.registerMember("Michael Phelps", LocalDate.parse("18-08-2002"), false, 61123452);
+        controller.registerMember("Bjarne Phelps", LocalDate.parse("18-08-2002"), true, 61123452);
+        controller.registerMember("Jobbe Phelps", LocalDate.parse("18-08-2002"), true, 61123452);
         ArrayList<Member> results = controller.getMembers();
         Member member = results.get(0);
         int expectedSize = results.size() - 1;
