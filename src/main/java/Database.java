@@ -4,8 +4,8 @@ public class Database {
     private ArrayList<Member> members = new ArrayList<>();
     private boolean changes = false;
 
-    public Member registerMember(String name, int age, int phoneNumber, boolean isActive){
-        Member member = new Member(name, age, phoneNumber, isActive);
+    public Member registerMember(String name, int age, boolean isActive) {
+        Member member = new Member(name, age, isActive);
         members.add(member);
 
         changes = true;
@@ -16,17 +16,25 @@ public class Database {
         return members;
     }
 
-    public ArrayList<Member> searchForMember(String searchTerm){
+    public ArrayList<Member> searchForMember(String searchTerm) {
         ArrayList<Member> searchResults = new ArrayList<>();
 
-        for (Member member : members){
+        for (Member member : members) {
             String name = member.getName().toLowerCase();
-            if (name.contains(searchTerm.toLowerCase().trim())){
+            if (name.contains(searchTerm.toLowerCase().trim())) {
                 searchResults.add(member);
             }
         }
 
         return searchResults;
+    }
+
+    public boolean deleteMember(Member member) {
+
+        getMembers().remove(member);
+        boolean success = true;
+        changes = true;
+        return success;
     }
 
     public boolean isChanges() {
