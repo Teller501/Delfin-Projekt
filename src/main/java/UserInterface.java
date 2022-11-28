@@ -258,16 +258,30 @@ public class UserInterface {
                 editMember.setName(newName);
             }
 
-            System.out.println("Alder: " + editMember.getBirthday());
+            System.out.println("Fødselsdato: " + editMember.getBirthday().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
             do {
                 try{
-                    String newAge = scanner.nextLine();
-                    if (!newAge.isEmpty()) {
-                        editMember.setBirthday(LocalDate.parse(newAge));
+                    String newBirthDay = String.valueOf(LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                    if (!newBirthDay.isEmpty()) {
+                        editMember.setBirthday(LocalDate.parse(newBirthDay));
                     }
                     inputError = false;
-                }catch (NumberFormatException e){
-                    System.out.println("Indtast venligst et tal!");
+                }catch (NumberFormatException | DateTimeParseException e){
+                    System.out.println("Indtast venligst en gyldig dato!");
+                    inputError = true;
+                }
+            }while(inputError);
+
+            System.out.println("Indmeldesesdato: " + editMember.getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+            do {
+                try{
+                    String newRegisterDate = String.valueOf(LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                    if (!newRegisterDate.isEmpty()) {
+                        editMember.setBirthday(LocalDate.parse(newRegisterDate));
+                    }
+                    inputError = false;
+                }catch (NumberFormatException | DateTimeParseException e){
+                    System.out.println("Indtast venligst en gyldig dato!");
                     inputError = true;
                 }
             }while(inputError);
