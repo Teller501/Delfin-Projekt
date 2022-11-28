@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Member {
 
@@ -57,5 +58,11 @@ public class Member {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+    }
+
+    public int calculateAge(){
+        LocalDate today = LocalDate.now();
+        int age = (int) ChronoUnit.YEARS.between(birthday,today);
+        return age;
     }
 }
