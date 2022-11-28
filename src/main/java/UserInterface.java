@@ -148,6 +148,18 @@ public class UserInterface {
         }
     }
 
+    private int getValidNumber(int min, int max) {
+        boolean inputError = false;
+        // har en try catch og while, indtil der er indtastet noget gyldigt mellem min og max
+        try {
+        }
+        catch (IndexOutOfBoundsException | NumberFormatException e) {
+            System.out.println("Input ikke gyldigt, prøv venligst igen!");
+            inputError = true;
+        }
+        return 0; // returnerer det gyldige indtastede
+    }
+
     private void searchForMember() {
         System.out.println("Indtast søgeord: ");
         String searchTerm = scanner.nextLine();

@@ -4,13 +4,13 @@ public class Member {
 
     private String name;
     private LocalDate birthday;
-    private boolean isActive;
+    private boolean active;
     private int phoneNumber;
 
-    public Member(String name, LocalDate birthday, boolean isActive, int phoneNumber) {
+    public Member(String name, LocalDate birthday, boolean active, int phoneNumber) {
         this.name = name;
         this.birthday = birthday;
-        this.isActive = isActive;
+        this.active = active;
         this.phoneNumber = phoneNumber;
     }
 
@@ -30,7 +30,7 @@ public class Member {
 //    }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public int getPhoneNumber() {
@@ -48,7 +48,7 @@ public class Member {
 
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
     public void setPhoneNumber(int phoneNumber) {
