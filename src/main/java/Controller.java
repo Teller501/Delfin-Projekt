@@ -1,7 +1,6 @@
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.logging.FileHandler;
 
 public class Controller {
     Database database = new Database();
@@ -43,5 +42,9 @@ public class Controller {
 
     public boolean isChanges() {
         return database.isChanges();
+    }
+
+    public int getTotalContribution(){
+        return database.getTotalContribution();
     }
 }

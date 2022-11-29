@@ -21,4 +21,16 @@ class MemberTest {
         assertEquals(expected,actual);
     }
 
+    @Test
+    void calculateJuniorSwimmerPrice(){
+        //arrange
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        Member member = new Member("Anders Teller", LocalDate.parse("18-08-2010",df),LocalDate.parse("18-08-2002",df), true, 61123452);
+
+        int expected = 1000;
+        int result = member.getContributionPrice();
+
+        assertEquals(expected,result);
+    }
+
 }

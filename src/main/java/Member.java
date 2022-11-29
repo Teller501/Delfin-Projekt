@@ -9,7 +9,7 @@ public class Member {
     private LocalDate registerDate;
     private boolean active;
     private int phoneNumber;
-    private boolean juniorSwimmer, seniorSwimmer;
+    private Contribution contribution = new Contribution(this);
 
     public Member(String name, LocalDate birthday, LocalDate registerDate, boolean active, int phoneNumber) {
         this.name = name;
@@ -46,14 +46,6 @@ public class Member {
         return birthday;
     }
 
-    public boolean isJuniorSwimmer() {
-        return juniorSwimmer;
-    }
-
-    public boolean isSeniorSwimmer() {
-        return seniorSwimmer;
-    }
-
     public LocalDate getRegisterDate() {
         return registerDate;
     }
@@ -86,14 +78,22 @@ public class Member {
         return age;
     }
 
-    public void calculateMemberType(){
+    public MemberType calculateMemberType(){
         if (calculateAge() < 18){
-            juniorSwimmer = true;
-            seniorSwimmer = false;
+            return MemberType.JUNIOR_SWIMMER;
         }else if(calculateAge() > 60){
-            seniorSwimmer = true;
-            juniorSwimmer = false;
+            return MemberType.PENSION_SWIMMER;
+        }else{
+            return MemberType.SENIOR_SWIMMER;
         }
+    }
+
+    public Contribution getContribution() {
+        return contribution;
+    }
+
+    public int getContributionPrice(){
+        return getContribution().calculateContributionPrice();
     }
 
 
