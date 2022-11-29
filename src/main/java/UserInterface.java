@@ -71,7 +71,7 @@ public class UserInterface {
 
         do {
             try {
-                System.out.println("Indtast medlemmets fødelsdato: (dd-mm-yyyy)");
+                System.out.println("Indtast medlemmets fødselsdato: (dd-mm-yyyy)");
                 birthday = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 birthdayInputError = false;
             } catch (NumberFormatException | DateTimeParseException e) {
@@ -102,7 +102,7 @@ public class UserInterface {
 
         do{
             try{
-                System.out.println("Indtast medlemmets telefonnr: ");
+                System.out.println("Indtast medlemmets telefon-nr: ");
                 phoneNumberInput = scanner.nextLine();
 
                 if (phoneNumberInput.length() == 8){
@@ -124,7 +124,7 @@ public class UserInterface {
         char activeStatus;
 
         do {
-            System.out.println("Skal brugeren have et aktivt medlemsskab? (j / n) ");
+            System.out.println("Skal brugeren have et aktivt medlemskab? (j / n) ");
             activeStatus = scanner.next().charAt(0);
             System.out.println();
 
@@ -148,12 +148,12 @@ public class UserInterface {
                 member.calculateMemberType();
 
                 System.out.println("Navn: " + member.getName());
-                System.out.println("Fødseldag: " + member.getBirthday().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                System.out.println("Fødselsdag: " + member.getBirthday().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                 System.out.println("Telefon nr: " + member.getPhoneNumber());
-                System.out.println("Medlemsstype: " + (member.calculateMemberType() == MemberType.JUNIOR_SWIMMER ? "Juniorsvømmer" : "")
+                System.out.println("Medlemstype: " + (member.calculateMemberType() == MemberType.JUNIOR_SWIMMER ? "Juniorsvømmer" : "")
                         + (member.calculateMemberType() == MemberType.SENIOR_SWIMMER ? "Seniorsvømmer" : "")
                         +(member.calculateMemberType() == MemberType.PENSION_SWIMMER ? "Pensionist":""));
-                System.out.println("Medlemsskab: " + (member.isActive() ? "Aktivt" : "Passivt"));
+                System.out.println("Medlemskab: " + (member.isActive() ? "Aktivt" : "Passivt"));
                 System.out.println("Indmeldingsdato: " + member.getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                 System.out.println("------------------------------------------------------");
             }
@@ -162,18 +162,6 @@ public class UserInterface {
         } else {
             System.out.println("Der er ingen registreret medlemmer i systemet.");
         }
-    }
-
-    private int getValidNumber(int min, int max) {
-        boolean inputError = false;
-        // har en try catch og while, indtil der er indtastet noget gyldigt mellem min og max
-        try {
-        }
-        catch (IndexOutOfBoundsException | NumberFormatException e) {
-            System.out.println("Input ikke gyldigt, prøv venligst igen!");
-            inputError = true;
-        }
-        return 0; // returnerer det gyldige indtastede
     }
 
     private void searchForMember() {
@@ -201,10 +189,10 @@ public class UserInterface {
                     System.out.println("Navn: " + searchResult.get(choice - 1).getName());
                     System.out.println("Fødselsdag: " + searchResult.get(choice - 1).getBirthday() + "år");
                     System.out.println("Telefon nr: " + searchResult.get(choice - 1).getPhoneNumber());
-                    System.out.println("Medlemsskab: " + (searchResult.get(choice - 1).isActive() ? "Aktivt" : "Passivt"));
+                    System.out.println("Medlemskab: " + (searchResult.get(choice - 1).isActive() ? "Aktivt" : "Passivt"));
                     System.out.println("------------------------------------------------------");
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                    System.out.println("Input ikkt gyldigt, prøv venligst igen!");
+                    System.out.println("Input ikke gyldigt, prøv venligst igen!");
                     inputError = true;
                 }
             } while (inputError);
@@ -275,7 +263,7 @@ public class UserInterface {
             } while (inputError);
 
 
-            System.out.println("Indmeldesesdato: " + editMember.getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+            System.out.println("Indmeldelsesdato: " + editMember.getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
             do {
                 try{
                     String newRegisterDate = scanner.nextLine();
@@ -289,11 +277,30 @@ public class UserInterface {
                 }
             }while(inputError);
 
-            System.out.println("Medlemsskabsstatus: " + (editMember.isActive() ? "Aktivt" : "Passivt"));
-            char activeStatus;
-
+            System.out.println("Telefon-nr: " + (editMember.getPhoneNumber()));
             do {
-                System.out.println("Skal brugeren have et aktivt medlemsskab? (j / n) ");
+                try {
+                    String newPhoneNumber = scanner.nextLine().trim();
+                    if (!newPhoneNumber.isEmpty()) {
+                        if (newPhoneNumber.length() == 8) {
+                            editMember.setPhoneNumber(Integer.parseInt(newPhoneNumber));
+                            inputError = false;
+                        } else {
+                            System.out.println("Du skal indtaste 8 cifre! ");
+                            inputError = true;
+                        }
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Indtast venligst et gyldigt telefon-nr! - Skal være 8 tal.");
+                    inputError = true;
+                }
+            } while (inputError);
+
+
+            System.out.println("Medlemskabsstatus: " + (editMember.isActive() ? "Aktivt" : "Passivt"));
+            char activeStatus;
+            do {
+                System.out.println("Skal brugeren have et aktivt medlemskab? (j / n) ");
                 activeStatus = scanner.next().charAt(0);
                 System.out.println();
 
@@ -342,5 +349,16 @@ public class UserInterface {
             } while (inputError);
 
         }
+    }
+
+
+    //Kan laves som extra detalje hvis vi har tid til over:
+    private int getValidNumber(int min, int max) {
+        // har en try catch og while, indtil der er indtastet noget gyldigt mellem min og max
+        try {
+        }
+        catch (IndexOutOfBoundsException | NumberFormatException e) {
+        }
+        return 0; // returnerer det gyldige indtastede
     }
 }
