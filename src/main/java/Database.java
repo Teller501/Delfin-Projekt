@@ -18,6 +18,14 @@ public class Database {
         return members;
     }
 
+    public int getTotalContribution(){
+        int totalContribution = 0;
+        for (Member member : members){
+            totalContribution += member.getContributionPrice();
+        }
+        return totalContribution;
+    }
+
     public ArrayList<Member> searchForMember(String searchTerm) {
         ArrayList<Member> searchResults = new ArrayList<>();
 

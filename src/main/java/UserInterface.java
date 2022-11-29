@@ -150,7 +150,9 @@ public class UserInterface {
                 System.out.println("Navn: " + member.getName());
                 System.out.println("Fødseldag: " + member.getBirthday().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                 System.out.println("Telefon nr: " + member.getPhoneNumber());
-                System.out.println("Medlemsstype: " + (member.isJuniorSwimmer() ? "Juniorsvømmer" : "") + (member.isSeniorSwimmer() ? "Seniorsvømmer" : ""));
+                System.out.println("Medlemsstype: " + (member.calculateMemberType() == MemberType.JUNIOR_SWIMMER ? "Juniorsvømmer" : "")
+                        + (member.calculateMemberType() == MemberType.SENIOR_SWIMMER ? "Seniorsvømmer" : "")
+                        +(member.calculateMemberType() == MemberType.PENSION_SWIMMER ? "Pensionist":""));
                 System.out.println("Medlemsskab: " + (member.isActive() ? "Aktivt" : "Passivt"));
                 System.out.println("Indmeldingsdato: " + member.getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                 System.out.println("------------------------------------------------------");

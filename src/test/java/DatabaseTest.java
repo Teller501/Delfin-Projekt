@@ -14,10 +14,6 @@ class DatabaseTest {
     public void setup() {
         database = new Database();
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        database.registerMember("Anders Teller", LocalDate.parse("18-08-2002",df),LocalDate.parse("18-08-2002",df), true, 61123452);
-        database.registerMember("Nicolai Andersson", LocalDate.parse("18-08-2002",df),LocalDate.parse("18-08-2002",df), true, 61123452);
-        database.registerMember("Victor Hanert", LocalDate.parse("18-08-2002",df),LocalDate.parse("18-08-2002",df), true, 61123452);
-        database.registerMember("Omar Kayed", LocalDate.parse("18-08-2002",df),LocalDate.parse("18-08-2002",df), true, 61123452);
     }
 
     @Test
@@ -80,10 +76,15 @@ class DatabaseTest {
     }
 
     @Test
-    void isChanges() {
-    }
+    void getTotalContribution(){
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        database.registerMember("Michael Phelps", LocalDate.parse("18-08-2012",df),LocalDate.parse("18-08-2002",df), true,61123452);
+        database.registerMember("Bjarne Phelps", LocalDate.parse("18-08-2002",df),LocalDate.parse("18-08-2002",df), true, 61123452);
+        database.registerMember("Jobbe Phelps", LocalDate.parse("18-08-1912",df),LocalDate.parse("18-08-2002",df), true, 61123452);
 
-    @Test
-    void setChanges() {
+        int expected = 3800;
+        int actual = database.getTotalContribution();
+
+        assertEquals(expected,actual);
     }
 }
