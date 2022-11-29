@@ -260,28 +260,29 @@ public class UserInterface {
 
             System.out.println("Fødselsdato: " + editMember.getBirthday().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
             do {
-                try{
-                    String newBirthDay = String.valueOf(LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                try {
+                    String newBirthDay = scanner.nextLine();
                     if (!newBirthDay.isEmpty()) {
-                        editMember.setBirthday(LocalDate.parse(newBirthDay));
+                        editMember.setBirthday(LocalDate.parse(newBirthDay,DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                     }
                     inputError = false;
-                }catch (NumberFormatException | DateTimeParseException e){
-                    System.out.println("Indtast venligst en gyldig dato!");
+                } catch (NumberFormatException | DateTimeParseException e) {
+                    System.out.println("Indtast venligst en gyldig dato! - Benyt denne format: dd-MM-yyyy");
                     inputError = true;
                 }
-            }while(inputError);
+            } while (inputError);
+
 
             System.out.println("Indmeldesesdato: " + editMember.getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
             do {
                 try{
-                    String newRegisterDate = String.valueOf(LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                    String newRegisterDate = scanner.nextLine();
                     if (!newRegisterDate.isEmpty()) {
-                        editMember.setBirthday(LocalDate.parse(newRegisterDate));
+                        editMember.setBirthday(LocalDate.parse(newRegisterDate, DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                     }
                     inputError = false;
                 }catch (NumberFormatException | DateTimeParseException e){
-                    System.out.println("Indtast venligst en gyldig dato!");
+                    System.out.println("Indtast venligst en gyldig dato! - Benyt denne format: dd-MM-yyyy");
                     inputError = true;
                 }
             }while(inputError);
