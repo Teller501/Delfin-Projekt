@@ -54,4 +54,14 @@ public class Database {
     public void setChanges(boolean changes) {
         this.changes = changes;
     }
+
+    public ArrayList<Member> getMembersInArrear(){
+        ArrayList<Member> membersInArrear = new ArrayList<>();
+        for (Member member : members){
+            if (member.getArrearStatus()){
+                membersInArrear.add(member);
+            }
+        }
+        return membersInArrear;
+    }
 }

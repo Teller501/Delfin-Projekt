@@ -96,5 +96,9 @@ public class Member {
         return getContribution().calculateContributionPrice();
     }
 
+    public boolean getArrearStatus(){
+        return contribution.isInArrear();
+    }
+
 
 }

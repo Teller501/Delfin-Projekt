@@ -1,6 +1,10 @@
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 public class Contribution {
     private int price;
     private Member member;
+    private boolean arrear;
 
     public Contribution(Member member) {
         this.member = member;
@@ -24,6 +28,17 @@ public class Contribution {
             }
         }
         return price;
+    }
+
+    public boolean isInArrear(){
+        int yearsBetweeen = (int) ChronoUnit.YEARS.between(member.getRegisterDate(), LocalDate.now());
+
+        if (yearsBetweeen > 1){
+            arrear = true;
+        }else{
+            arrear = false;
+        }
+        return arrear;
     }
 
 }

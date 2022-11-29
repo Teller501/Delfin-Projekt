@@ -87,4 +87,46 @@ class DatabaseTest {
 
         assertEquals(expected,actual);
     }
+
+    @Test
+    void getOneInArrear(){
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        database.registerMember("Michael Phelps", LocalDate.parse("18-08-2012",df),LocalDate.parse("18-08-2002",df), true,61123452);
+        database.registerMember("Michael Phelps", LocalDate.parse("18-08-2012",df),LocalDate.parse("18-08-2022",df), true,61123452);
+        database.registerMember("Michael Phelps", LocalDate.parse("18-08-2012",df),LocalDate.parse("18-08-2022",df), true,61123452);
+
+        int expected = 1;
+        int actual = database.getMembersInArrear().size();
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void getMultipleInArrear(){
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        database.registerMember("Michael Phelps", LocalDate.parse("18-08-2012",df),LocalDate.parse("18-08-2002",df), true,61123452);
+        database.registerMember("Michael Phelps", LocalDate.parse("18-08-2012",df),LocalDate.parse("18-08-2002",df), true,61123452);
+        database.registerMember("Michael Phelps", LocalDate.parse("18-08-2012",df),LocalDate.parse("18-08-2002",df), true,61123452);
+        database.registerMember("Michael Phelps", LocalDate.parse("18-08-2012",df),LocalDate.parse("18-08-2002",df), true,61123452);
+        database.registerMember("Michael Phelps", LocalDate.parse("18-08-2012",df),LocalDate.parse("18-08-2022",df), true,61123452);
+        database.registerMember("Michael Phelps", LocalDate.parse("18-08-2012",df),LocalDate.parse("18-08-2022",df), true,61123452);
+
+        int expected = 4;
+        int actual = database.getMembersInArrear().size();
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void getZeroInArrear(){
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        database.registerMember("Michael Phelps", LocalDate.parse("18-08-2012",df),LocalDate.parse("18-08-2022",df), true,61123452);
+        database.registerMember("Michael Phelps", LocalDate.parse("18-08-2012",df),LocalDate.parse("18-08-2022",df), true,61123452);
+        database.registerMember("Michael Phelps", LocalDate.parse("18-08-2012",df),LocalDate.parse("18-08-2022",df), true,61123452);
+
+        int expected = 0;
+        int actual = database.getMembersInArrear().size();
+
+        assertEquals(expected,actual);
+    }
 }

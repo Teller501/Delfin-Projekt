@@ -38,11 +38,24 @@ class ContributionTest {
     void calculatePensionSwimmerPrice(){
         //arrange
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        Member member = new Member("Anders Teller", LocalDate.parse("18-08-2002",df),LocalDate.parse("18-08-2002",df), true, 61123452);
+        Member member = new Member("Anders Teller", LocalDate.parse("18-08-1911",df),LocalDate.parse("18-08-2002",df), true, 61123452);
 
 
         int expected = 1200;
         int result = member.getContributionPrice();
+
+        assertEquals(expected,result);
+    }
+
+    @Test
+    void arrearTest(){
+        //arrange
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        Member member = new Member("Anders Teller", LocalDate.parse("18-08-1911",df),LocalDate.parse("18-08-2002",df), true, 61123452);
+
+
+        boolean expected = true;
+        boolean result = member.getArrearStatus();
 
         assertEquals(expected,result);
     }
