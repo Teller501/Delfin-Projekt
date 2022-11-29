@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.time.format.DateTimeFormatter;
 
 public class Member {
 
@@ -18,6 +19,8 @@ public class Member {
         this.phoneNumber = phoneNumber;
 
     }
+
+    DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public Member() {
         // Empty for loading data

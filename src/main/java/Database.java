@@ -1,10 +1,11 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Database {
     private ArrayList<Member> members = new ArrayList<>();
     private boolean changes = false;
-
+    DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public Member registerMember(String name, LocalDate birthday, LocalDate registerDate , boolean isActive, int phoneNumber) {
         Member member = new Member(name, birthday, registerDate ,isActive, phoneNumber);
         members.add(member);

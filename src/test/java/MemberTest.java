@@ -10,10 +10,11 @@ class MemberTest {
 
     @Test
     void calculateAge(){
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate today = LocalDate.now();
-        LocalDate birthday = LocalDate.parse("29-11-2002", DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        LocalDate birthday = LocalDate.parse("29-11-2002",df);
 
-        int expected = 19;
+        int expected = 20;
 
         int actual = (int) ChronoUnit.YEARS.between(birthday,today);
 
