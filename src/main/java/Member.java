@@ -88,12 +88,8 @@ public class Member {
         }
     }
 
-    public Contribution getContribution() {
-        return contribution;
-    }
-
     public int getContributionPrice(){
-        return getContribution().calculateContributionPrice();
+        return contribution.calculateContributionPrice();
     }
 
     public boolean getArrearStatus(){
