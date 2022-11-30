@@ -100,5 +100,9 @@ public class Member {
         return contribution.isInArrear();
     }
 
+    public int getOwes(){
+        return contribution.calculateOwes();
+    }
+
 
 }

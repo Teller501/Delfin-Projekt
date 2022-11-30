@@ -461,7 +461,7 @@ public class UserInterface {
             for (Member member : controller.getMembersInArrear()){
                 System.out.println("Medlem: " + member.getName());
                 System.out.println("Kontingentbetaling: " + member.getContributionPrice() +"kr.");
-                System.out.println("Skylder: "); // TODO udregn med hvor meget medlemmet skylder
+                System.out.println("Skylder: " + member.getOwes() + "kr.");
                 System.out.println("------------------------------------");
             }
         }
