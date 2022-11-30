@@ -47,4 +47,8 @@ public class Controller {
     public int getTotalContribution(){
         return database.getTotalContribution();
     }
+
+    public ArrayList<Member> getMembersInArrear(){
+        return database.getMembersInArrear();
+    }
 }

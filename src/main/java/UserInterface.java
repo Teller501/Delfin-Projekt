@@ -19,42 +19,129 @@ public class UserInterface {
         int menuInput = 0;
         boolean inputError;
 
-        while (menuInput != 9) {
-            // Printing out menu
-            System.out.println("""
-                    Velkommen til Delfinen Svømmeklub!
-                                        
-                    1. Registrer nyt medlem
-                    2. Vis liste af oprettede medlemmer
-                    3. Søg efter medlem
-                    4. Rediger medlem
-                    5. Udmeld medlem
-                    6. Hold menu (opret hold, se liste af hold)
-                    8. Gem data
-                    9. Afslut program
-                    """);
 
-            do {
-                try {
-                    menuInput = scanner.nextInt();
-                    scanner.nextLine();
+        // Printing out menu
+        System.out.println("""
+                Velkommen til Delfinen Svømmeklub!
+                
+                Vælg venligst hvem du er:
+                
+                
+                1. Formand
+                2. Træner
+                3. Kasserer                    
+                
+                """);
 
-                    switch (menuInput) {
-                        case 1 -> registerMember();
-                        case 2 -> printMembers();
-                        case 3 -> searchForMember();
-                        case 4 -> editMember();
-                        case 5 -> deleteMember();
-                        case 8 -> saveData();
-                    }
-                    inputError = false;
-                } catch (InputMismatchException e) {
-                    System.out.println("Input er ugyldigt, prøv venligst igen!");
+        do {
+            try {
+                Profession profession = null;
+                menuInput = scanner.nextInt();
+                scanner.nextLine();
 
-                    inputError = true;
-                    scanner.nextLine();
+                switch (menuInput) {
+                    case 1 -> profession = Profession.CHAIRMAN;
+                    case 2 -> profession = Profession.TRAINER;
+                    case 3 -> profession = Profession.CASHIER;
                 }
-            } while (inputError);
+                inputError = false;
+                showMenu(profession);
+            } catch (InputMismatchException e) {
+                System.out.println("Input er ugyldigt, prøv venligst igen!");
+
+                inputError = true;
+                scanner.nextLine();
+            }
+        } while (inputError);
+
+
+    }
+
+    private void showMenu(Profession profession){
+        int menuInput = 0;
+        boolean inputError;
+
+        while (menuInput != 9){
+            switch (profession){
+                case CHAIRMAN -> {
+                    System.out.println("""
+                        1. Registrer medlem
+                        2. Vis liste af medlemmer
+                        3. Søg efter medlem
+                        4. Rediger medlem
+                        5. Udmeld medlem
+                        
+                        8. Gem data
+                        9. Afslut program
+                        """);
+
+                    do {
+                        try {
+                            menuInput = scanner.nextInt();
+                            scanner.nextLine();
+
+                            switch (menuInput) {
+                                case 1 -> registerMember();
+                                case 2 -> printMembers();
+                                case 3 -> searchForMember();
+                                case 4 -> editMember();
+                                case 5 -> deleteMember();
+
+                                case 8 -> saveData();
+                                case 9 -> System.exit(1);
+                            }
+                            inputError = false;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Input er ugyldigt, prøv venligst igen!");
+
+                            inputError = true;
+                            scanner.nextLine();
+                        }
+                    } while (inputError);
+                }
+                case TRAINER -> {
+                    System.out.println("""
+                            1. Opret hold
+                            2. Se liste af oprettede hold
+                            3. 
+                            """);
+
+                }
+                case CASHIER -> {
+                    System.out.println("""
+                            1. Se medlemmers kontigent
+                            2. Se samlet kontigent
+                            3. Se medlemmer i restance
+                            
+                            9. Afslut program
+                            """);
+                    do {
+                        try {
+                            menuInput = scanner.nextInt();
+                            scanner.nextLine();
+
+                            switch (menuInput) {
+                                case 1 -> viewContribution();
+                                case 2 -> {
+                                    System.out.println("Der er i øjeblikket registreret " + controller.getMembers().size() + " medlem" + (controller.getMembers().size() == 1 ? "" : "mer") + " i systemet");
+
+                                    System.out.println("Den samlede kontigentbetaling er: " + controller.getTotalContribution() + "kr.");
+                                    System.out.println();
+                                }
+                                case 3 -> viewMembersInArrear();
+
+                                case 9 -> System.exit(1);
+                            }
+                            inputError = false;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Input er ugyldigt, prøv venligst igen!");
+
+                            inputError = true;
+                            scanner.nextLine();
+                        }
+                    } while (inputError);
+                }
+            }
         }
     }
 
@@ -348,6 +435,35 @@ public class UserInterface {
                 }
             } while (inputError);
 
+        }
+    }
+
+    private void viewContribution(){
+        // For loop that gets contribution for each member and printing out:
+        System.out.println("------------------------------------");
+        for (Member member : controller.getMembers()){
+            System.out.println("Medlem: " + member.getName());
+            System.out.println("Kontingentbetaling: " + member.getContributionPrice() +"kr.");
+            System.out.println("------------------------------------");
+        }
+    }
+
+    private void viewMembersInArrear(){
+        ArrayList<Member> membersInArrear = controller.getMembersInArrear();
+
+        if (membersInArrear.isEmpty()){
+            System.out.println("Der er i øjeblikket ingen medlemmer i restance");
+        }else{
+            // For loop that loops through every member in arrear and printing out how much they owe
+            System.out.println("Der er i øjeblikket registreret " + membersInArrear.size() + " medlem" + (membersInArrear.size() == 1 ? "" : "mer") + " i restance");
+
+            System.out.println("------------------------------------");
+            for (Member member : controller.getMembersInArrear()){
+                System.out.println("Medlem: " + member.getName());
+                System.out.println("Kontingentbetaling: " + member.getContributionPrice() +"kr.");
+                System.out.println("Skylder: "); // TODO udregn med hvor meget medlemmet skylder
+                System.out.println("------------------------------------");
+            }
         }
     }
 
