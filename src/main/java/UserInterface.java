@@ -114,6 +114,7 @@ public class UserInterface {
 
                             switch (menuInput) {
                                 case 1 -> viewTeams();
+                                case 2 -> addMemberToTeam();
 
                                 case 9 -> System.exit(1);
                             }
@@ -516,11 +517,50 @@ public class UserInterface {
                     System.out.println("Ingen medlemmer tilføjet til " + team.getName());
                 }else{
                     for (Member member : team.getMembers()){
-                        System.out.print(member.getName() + ",");
+                        System.out.print(member.getName() + (team.getMembers().size()<=1?"":","));
                     }
+                    System.out.println();
                 }
                 System.out.println("------------------------------------");
             }
+        }
+    }
+
+    private void addMemberToTeam(){
+        int index = 1;
+        for (Team team : controller.getTeams()){
+            System.out.println(index++ + ": " + team.getName());
+        }
+
+        System.out.println("Vælg det hold du vil tilføje et medlem til: ");
+
+        int teamChoice = 1;
+        teamChoice = Integer.parseInt(scanner.nextLine());
+        Team teamChosen = controller.getTeams().get(teamChoice - 1);
+        System.out.println("Tilføjer til: " + teamChosen.getName());
+
+        System.out.println("Indtast søgeord for medlemmet du vil tilføje: ");
+        String searchTerm = scanner.nextLine();
+
+        ArrayList<Member> searchResults = controller.searchForMember(searchTerm);
+
+        if (searchResults.isEmpty()) {
+            System.out.println("Ingen fundet");
+        }else{
+            index = 1;
+            for (Member searchResult : searchResults) {
+                System.out.println(index++ + ": " + searchResult.getName());
+            }
+
+            System.out.println("Vælg den svømmer du vil tilføje: ");
+
+            int memberChoice = 1;
+            memberChoice = Integer.parseInt(scanner.nextLine());
+            Member memberChosen = searchResults.get(memberChoice - 1);
+
+            controller.addMemberToTeam(teamChosen, memberChosen);
+
+            System.out.println(memberChosen.getName() + " er tilføjet til " + teamChosen.getName());
         }
     }
 }

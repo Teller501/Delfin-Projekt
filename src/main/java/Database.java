@@ -89,4 +89,5 @@ public class Database {
     public ArrayList<Team> getTeams() {
         return teams;
     }
+
 }

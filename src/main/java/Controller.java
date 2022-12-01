@@ -55,4 +55,8 @@ public class Controller {
     public ArrayList<Team> getTeams(){
         return database.getTeams();
     }
+
+    public void addMemberToTeam(Team team, Member member){
+        team.addMember(member);
+    }
 }
