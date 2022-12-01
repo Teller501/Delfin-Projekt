@@ -116,6 +116,7 @@ public class UserInterface {
                                 case 1 -> viewTeams();
                                 case 2 -> addMemberToTeam();
 
+                                case 8 -> saveData();
                                 case 9 -> System.exit(1);
                             }
                             inputError = false;

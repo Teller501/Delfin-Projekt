@@ -21,7 +21,7 @@ public class Controller {
     // Calls the save method from FileHandler Class
     public void saveData() {
         try {
-            fileHandler.saveData(database.getMembers());
+            fileHandler.saveData(database.getMembers(), database.getTeams());
         } catch (FileNotFoundException e) { // if the file does not exist
             System.out.println("Filen findes ikke...");
         }
@@ -30,7 +30,7 @@ public class Controller {
     // Calls the load method from FileHandler Class
     public void loadData() {
         try {
-            fileHandler.loadData(database.getMembers());
+            fileHandler.loadData(database.getMembers(), database.getTeams());
         } catch (FileNotFoundException e) {// if the file does not exist
             System.out.println("Filen findes ikke...");
         }

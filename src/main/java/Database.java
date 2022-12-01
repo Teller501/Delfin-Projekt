@@ -25,6 +25,7 @@ public class Database {
         Team seniorRygcrawl = new Team("Rygcrawl Senior", "Rygcrawl");
 
         Collections.addAll(teams, u18Bryst,u18Butterfly,u18Crawl,u18Rygcrawl,seniorBryst,seniorButterfly,seniorCrawl,seniorRygcrawl);
+        changes = true;
     }
 
     public Member registerMember(String name, LocalDate birthday, LocalDate registerDate , boolean isActive, int phoneNumber) {

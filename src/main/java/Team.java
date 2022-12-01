@@ -13,6 +13,10 @@ public class Team {
         this.disciplin = disciplin;
     }
 
+    public Team(){
+
+    }
+
     public ArrayList<Member> getMembers() {
         return members;
     }
@@ -27,5 +31,17 @@ public class Team {
 
     public String getDisciplin() {
         return disciplin;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDisciplin(String disciplin) {
+        this.disciplin = disciplin;
+    }
+
+    public void setMembers(ArrayList<Member> members) {
+        this.members = members;
     }
 }

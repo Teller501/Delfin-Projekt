@@ -7,8 +7,9 @@ import java.util.Scanner;
 
 public class Filehandler {
 
-    public void saveData(ArrayList<Member> members) throws FileNotFoundException {
+    public void saveData(ArrayList<Member> members, ArrayList<Team> teams) throws FileNotFoundException {
         PrintStream output = new PrintStream(new File("data/members.csv"));
+        PrintStream teamOutput = new PrintStream(new File("data/teams.csv"));
 
         for (Member member : members) {
             output.print(member.getName());
@@ -24,24 +25,44 @@ public class Filehandler {
             output.println();
         }
 
+        for (Team team : teams){
+            teamOutput.print(team.getName());
+            teamOutput.print(";");
+            teamOutput.print(team.getDisciplin());
+            teamOutput.print(";");
+            teamOutput.print(team.getMembers());
+            teamOutput.print(";");
+            teamOutput.println();
+        }
+
         //Slutte med close:
         output.close();
         output.flush();
+        teamOutput.close();
+        teamOutput.flush();
     }
 
-    public void loadData(ArrayList<Member> members) throws FileNotFoundException {
+    public void loadData(ArrayList<Member> members, ArrayList<Team> teams) throws FileNotFoundException {
         // Clear list of names before load:
         members.clear();
+        teams.clear();
 
         Scanner reader = new Scanner(new File("data/members.csv"));
+        Scanner readerTeams = new Scanner(new File("data/teams.csv"));
 
         while (reader.hasNextLine()) {
             String line = reader.nextLine();
+            String teamLine = readerTeams.nextLine();
 
             Member dataObjekt = parseCSVLine(line);
             members.add(dataObjekt);
 
+            Team dataTeamObjekt = parseTeamCSVLine(teamLine);
+            teams.add(dataTeamObjekt);
+
+
             System.out.println(line);
+            System.out.println(teamLine);
         }
     }
 
@@ -61,5 +82,21 @@ public class Filehandler {
             return null;
         }
 
+    }
+
+    private Team parseTeamCSVLine(String line){
+        try{
+            String[] parts = line.split(";");
+
+            Team dataObjekt = new Team();
+            dataObjekt.setName(parts[0]);
+            dataObjekt.setDisciplin(parts[1]);
+            dataObjekt.setMembers(dataObjekt.getMembers());
+            return dataObjekt;
+
+        }catch(NumberFormatException e ){
+            System.out.println("Kan ikke loade data, fejl i input");
+            return null;
+        }
     }
 }
