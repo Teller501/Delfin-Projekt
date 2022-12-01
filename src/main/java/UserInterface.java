@@ -22,14 +22,16 @@ public class UserInterface {
 
         // Printing out menu
         System.out.println("""
+                
                 Velkommen til Delfinen Svømmeklub!
                 
                 Vælg venligst hvem du er:
                 
-                
                 1. Formand
                 2. Træner
-                3. Kasserer                    
+                3. Kasserer
+                
+                9. Afslut program                
                 
                 """);
 
@@ -71,7 +73,8 @@ public class UserInterface {
                         4. Rediger medlem
                         5. Udmeld medlem
                         
-                        8. Gem data
+                        7. Gem data
+                        8. Gå tilbage til start
                         9. Afslut program
                         """);
 
@@ -87,7 +90,8 @@ public class UserInterface {
                                 case 4 -> editMember();
                                 case 5 -> deleteMember();
 
-                                case 8 -> saveData();
+                                case 7 -> saveData();
+                                case 8 -> printWelcome();
                                 case 9 -> System.exit(1);
                             }
                             inputError = false;
@@ -102,8 +106,10 @@ public class UserInterface {
                 case TRAINER -> {
                     System.out.println("""
                             1. Se liste af oprettede hold
-                            3. 
+                            2. Tilføj medlem til hold
                             
+                            7. Gem data
+                            8. Gå tilbage til start
                             9. Afslut program
                             """);
 
@@ -116,7 +122,8 @@ public class UserInterface {
                                 case 1 -> viewTeams();
                                 case 2 -> addMemberToTeam();
 
-                                case 8 -> saveData();
+                                case 7 -> saveData();
+                                case 8 -> printWelcome();
                                 case 9 -> System.exit(1);
                             }
                             inputError = false;
@@ -135,6 +142,7 @@ public class UserInterface {
                             2. Se samlet kontigent
                             3. Se medlemmer i restance
                             
+                            8. Gå tilbage til start
                             9. Afslut program
                             """);
                     do {
@@ -151,7 +159,7 @@ public class UserInterface {
                                     System.out.println();
                                 }
                                 case 3 -> viewMembersInArrear();
-
+                                case 8 -> printWelcome();
                                 case 9 -> System.exit(1);
                             }
                             inputError = false;
@@ -518,7 +526,7 @@ public class UserInterface {
                     System.out.println("Ingen medlemmer tilføjet til " + team.getName());
                 }else{
                     for (Member member : team.getMembers()){
-                        System.out.print(member.getName() + (team.getMembers().size()<=1?"":","));
+                        System.out.print(member.getName() + (team.getMembers().size()<=1?"":", "));
                     }
                     System.out.println();
                 }

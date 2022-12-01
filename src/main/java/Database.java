@@ -1,8 +1,6 @@
-import javax.xml.crypto.Data;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Database {
     private ArrayList<Member> members = new ArrayList<>();
@@ -75,6 +73,11 @@ public class Database {
 
     public ArrayList<Team> getTeams() {
         return teams;
+    }
+
+    public void addMemberToTeam(Team team, Member member){
+        team.addMember(member);
+        changes = true;
     }
 
 }

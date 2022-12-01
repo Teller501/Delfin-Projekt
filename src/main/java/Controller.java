@@ -56,7 +56,12 @@ public class Controller {
         return database.getTeams();
     }
 
-    public void addMemberToTeam(Team team, Member member){
-        team.addMember(member);
+    public void addMemberToTeam(Team teamChosen, Member memberChosen) {
+        database.addMemberToTeam(teamChosen, memberChosen);
     }
+
+ /*   public void addMemberToTeam(Team team, Member member){
+        team.addMember(member);
+        isChanges();
+    }*/
 }

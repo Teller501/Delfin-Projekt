@@ -8,21 +8,21 @@ import java.util.Scanner;
 public class Filehandler {
 
     public void saveData(ArrayList<Member> members, ArrayList<Team> teams) throws FileNotFoundException {
-        PrintStream output = new PrintStream(new File("data/members.csv"));
+        PrintStream memberOutput = new PrintStream(new File("data/members.csv"));
         PrintStream teamOutput = new PrintStream(new File("data/teams.csv"));
 
         for (Member member : members) {
-            output.print(member.getName());
-            output.print(";");
-            output.print(member.getBirthday());
-            output.print(";");
-            output.print(member.getRegisterDate());
-            output.print(";");
-            output.print(member.getPhoneNumber());
-            output.print(";");
-            output.print(member.isActive());
-            output.print(";");
-            output.println();
+            memberOutput.print(member.getName());
+            memberOutput.print(";");
+            memberOutput.print(member.getBirthday());
+            memberOutput.print(";");
+            memberOutput.print(member.getRegisterDate());
+            memberOutput.print(";");
+            memberOutput.print(member.getPhoneNumber());
+            memberOutput.print(";");
+            memberOutput.print(member.isActive());
+            memberOutput.print(";");
+            memberOutput.println();
         }
 
         for (Team team : teams){
@@ -36,8 +36,8 @@ public class Filehandler {
         }
 
         //Slutte med close:
-        output.close();
-        output.flush();
+        memberOutput.close();
+        memberOutput.flush();
         teamOutput.close();
         teamOutput.flush();
     }
@@ -45,23 +45,22 @@ public class Filehandler {
     public void loadData(ArrayList<Member> members, ArrayList<Team> teams) throws FileNotFoundException {
         // Clear list of names before load:
         members.clear();
-        teams.clear();
+        Scanner readerMember = new Scanner(new File("data/members.csv"));
 
-        Scanner reader = new Scanner(new File("data/members.csv"));
+        while (readerMember.hasNextLine()) {
+            String memberLine = readerMember.nextLine();
+            Member dataMemberObjekt = parseCSVLine(memberLine);
+            members.add(dataMemberObjekt);
+            System.out.println(memberLine);
+        }
+
+        teams.clear();
         Scanner readerTeams = new Scanner(new File("data/teams.csv"));
 
-        while (reader.hasNextLine()) {
-            String line = reader.nextLine();
+        while (readerTeams.hasNextLine()) {
             String teamLine = readerTeams.nextLine();
-
-            Member dataObjekt = parseCSVLine(line);
-            members.add(dataObjekt);
-
             Team dataTeamObjekt = parseTeamCSVLine(teamLine);
             teams.add(dataTeamObjekt);
-
-
-            System.out.println(line);
             System.out.println(teamLine);
         }
     }
