@@ -101,10 +101,30 @@ public class UserInterface {
                 }
                 case TRAINER -> {
                     System.out.println("""
-                            1. Opret hold
-                            2. Se liste af oprettede hold
+                            1. Se liste af oprettede hold
                             3. 
+                            
+                            9. Afslut program
                             """);
+
+                    do {
+                        try {
+                            menuInput = scanner.nextInt();
+                            scanner.nextLine();
+
+                            switch (menuInput) {
+                                case 1 -> viewTeams();
+
+                                case 9 -> System.exit(1);
+                            }
+                            inputError = false;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Input er ugyldigt, prøv venligst igen!");
+
+                            inputError = true;
+                            scanner.nextLine();
+                        }
+                    } while (inputError);
 
                 }
                 case CASHIER -> {
@@ -476,5 +496,31 @@ public class UserInterface {
         catch (IndexOutOfBoundsException | NumberFormatException e) {
         }
         return 0; // returnerer det gyldige indtastede
+    }
+
+    private void viewTeams(){
+        ArrayList<Team> teams = controller.getTeams();
+
+        if (teams.isEmpty()){
+            System.out.println("Der er ingen hold registreret i systemet.");
+        }else{
+            System.out.println("Der er i øjeblikket registreret " + teams.size() + " hold i systemet.");
+
+
+            System.out.println("------------------------------------");
+            for (Team team : teams){
+                System.out.println("Hold: " + team.getName());
+                System.out.println("Disciplin: " + team.getDisciplin());
+                System.out.print("Medlemmer: ");
+                if (team.getMembers().isEmpty()){
+                    System.out.println("Ingen medlemmer tilføjet til " + team.getName());
+                }else{
+                    for (Member member : team.getMembers()){
+                        System.out.print(member.getName() + ",");
+                    }
+                }
+                System.out.println("------------------------------------");
+            }
+        }
     }
 }

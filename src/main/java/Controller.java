@@ -51,4 +51,8 @@ public class Controller {
     public ArrayList<Member> getMembersInArrear(){
         return database.getMembersInArrear();
     }
+
+    public ArrayList<Team> getTeams(){
+        return database.getTeams();
+    }
 }

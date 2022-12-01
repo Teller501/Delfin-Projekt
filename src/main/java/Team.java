@@ -20,4 +20,12 @@ public class Team {
     public void addMember(Member member){
         members.add(member);
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDisciplin() {
+        return disciplin;
+    }
 }
