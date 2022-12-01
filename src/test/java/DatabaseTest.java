@@ -129,4 +129,13 @@ class DatabaseTest {
 
         assertEquals(expected,actual);
     }
+
+    @Test
+    void viewTeams(){
+        int expected = 8;
+        int actual = database.getTeams().size();
+
+        assertEquals(expected,actual);
+    }
+
 }
