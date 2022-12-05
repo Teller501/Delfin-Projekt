@@ -1,9 +1,15 @@
+package Data;
+
+import Data.Database;
+import Data.Filehandler;
+import Member.Member;
+
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Controller {
-    Database database = new Database();
+    public Database database = new Database();
     Filehandler fileHandler = new Filehandler();
 
     public void registerMember(String name, LocalDate birthday,LocalDate registerDate , boolean isActive, int phoneNumber) {
@@ -60,7 +66,7 @@ public class Controller {
         database.addMemberToTeam(teamChosen, memberChosen);
     }
 
- /*   public void addMemberToTeam(Team team, Member member){
+ /*   public void addMemberToTeam(Team.Team team, Member.Member member){
         team.addMember(member);
         isChanges();
     }*/

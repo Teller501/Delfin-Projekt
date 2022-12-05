@@ -1,3 +1,4 @@
+import Member.Member;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

@@ -1,3 +1,7 @@
+package Data;
+
+import Member.Member;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

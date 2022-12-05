@@ -1,12 +1,16 @@
+package Team;
+
+import Member.Member;
+
 import java.util.ArrayList;
 
 public class Team {
     private String name;
     private String disciplin;
-//  private Trainer trainer; // TODO : Lav træner klasse
+//  private Team.Trainer trainer; // TODO : Lav træner klasse
 
-//  private ArrayList<Result> trainingResults = new ArrayList<>(); // TODO: Lav resultat klasse
-//  private ArrayList<Result> competitionResults = new ArrayList<>(); // TODO: Lav resultat klasse
+//  private ArrayList<Member.Result> trainingResults = new ArrayList<>(); // TODO: Lav resultat klasse
+//  private ArrayList<Member.Result> competitionResults = new ArrayList<>(); // TODO: Lav resultat klasse
     private ArrayList<Member> members = new ArrayList<>();
 
     public Team(String name, String disciplin){

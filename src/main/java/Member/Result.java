@@ -1,3 +1,7 @@
+package Member;
+
+import Member.Member;
+
 import java.time.LocalDate;
 
 public class Result {

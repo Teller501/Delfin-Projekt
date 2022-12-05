@@ -1,3 +1,8 @@
+package UI;
+
+import Member.Member;
+import Member.MemberType;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -65,7 +70,7 @@ public class UserInterface {
 
         while (menuInput != 9){
             switch (profession){
-                case CHAIRMAN -> {
+                case Profession.CHAIRMAN -> {
                     System.out.println("""
                         1. Registrer medlem
                         2. Vis liste af medlemmer
@@ -103,7 +108,7 @@ public class UserInterface {
                         }
                     } while (inputError);
                 }
-                case TRAINER -> {
+                case Profession.TRAINER -> {
                     System.out.println("""
                             1. Se liste af oprettede hold
                             2. Tilføj medlem til hold
@@ -136,7 +141,7 @@ public class UserInterface {
                     } while (inputError);
 
                 }
-                case CASHIER -> {
+                case Profession.CASHIER -> {
                     System.out.println("""
                             1. Se medlemmers kontigent
                             2. Se samlet kontigent
