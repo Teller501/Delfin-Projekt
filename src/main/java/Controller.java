@@ -45,7 +45,7 @@ public class Controller {
     }
 
     public int getTotalContribution(){
-        return database.getTotalContribution();
+        return database.calculateTotalContribution();
     }
 
     public ArrayList<Member> getMembersInArrear(){

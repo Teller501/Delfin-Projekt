@@ -5,7 +5,7 @@ public class Contribution {
     private int price;
     private Member member;
     private boolean arrear;
-    private int owes;
+    private int guilt;
 
     public Contribution(Member member) {
         this.member = member;
@@ -32,9 +32,6 @@ public class Contribution {
         return price;
     }
 
-    public int getPrice() {
-        return price;
-    }
 
     // Calculates if the member is in arrear
     public boolean isInArrear(){
@@ -49,12 +46,12 @@ public class Contribution {
     }
 
     // Calculates how much members in arrear owes the swimclub
-    public int calculateOwes(){
+    public int calculateGuilt(){
         int yearsBetweeen = (int) ChronoUnit.YEARS.between(member.getRegisterDate(), LocalDate.now());
         if (arrear){
-            owes = yearsBetweeen * price;
+            guilt = yearsBetweeen * price;
         }
-        return owes;
+        return guilt;
     }
 
 }

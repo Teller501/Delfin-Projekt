@@ -5,7 +5,8 @@ public class Team {
     private String disciplin;
 //  private Trainer trainer; // TODO : Lav træner klasse
 
-//  private ArrayList<Results> results = new ArrayList<>(); // TODO: Lav resultat klasse
+//  private ArrayList<Result> trainingResults = new ArrayList<>(); // TODO: Lav resultat klasse
+//  private ArrayList<Result> competitionResults = new ArrayList<>(); // TODO: Lav resultat klasse
     private ArrayList<Member> members = new ArrayList<>();
 
     public Team(String name, String disciplin){

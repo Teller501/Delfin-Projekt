@@ -24,7 +24,7 @@ public class Database {
         return members;
     }
 
-    public int getTotalContribution(){
+    public int calculateTotalContribution(){
         int totalContribution = 0;
         for (Member member : members){
             totalContribution += member.getContributionPrice();

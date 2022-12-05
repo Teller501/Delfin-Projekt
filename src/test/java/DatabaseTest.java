@@ -83,7 +83,7 @@ class DatabaseTest {
         database.registerMember("Jobbe Phelps", LocalDate.parse("18-08-1912",df),LocalDate.parse("18-08-2002",df), true, 61123452);
 
         int expected = 3800;
-        int actual = database.getTotalContribution();
+        int actual = database.calculateTotalContribution();
 
         assertEquals(expected,actual);
     }

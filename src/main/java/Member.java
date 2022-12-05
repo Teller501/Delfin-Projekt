@@ -97,7 +97,7 @@ public class Member {
     }
 
     public int getOwes(){
-        return contribution.calculateOwes();
+        return contribution.calculateGuilt();
     }
 
 
