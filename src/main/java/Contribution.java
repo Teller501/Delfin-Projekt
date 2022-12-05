@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class Contribution {
-    private int price;
+    private int contributionPrice;
     private Member member;
     private boolean arrear;
     private int guilt;
@@ -19,22 +19,22 @@ public class Contribution {
     // Calculates the contribution price
     public int calculateContributionPrice(){
         if (!member.isActive()){
-            price = 500;
+            contributionPrice = 500;
         }else{
             if (member.calculateMemberType() == MemberType.JUNIOR_SWIMMER){
-                price = 1000;
+                contributionPrice = 1000;
             }else if(member.calculateMemberType() == MemberType.SENIOR_SWIMMER){
-                price = 1600;
+                contributionPrice = 1600;
             }else if (member.calculateMemberType() == MemberType.PENSION_SWIMMER){
-                price = 1200;
+                contributionPrice = 1200;
             }
         }
-        return price;
+        return contributionPrice;
     }
 
 
     // Calculates if the member is in arrear
-    public boolean isInArrear(){
+    public boolean isArrear(){
         int yearsBetweeen = (int) ChronoUnit.YEARS.between(member.getRegisterDate(), LocalDate.now());
 
         if (yearsBetweeen > 1){
@@ -49,7 +49,7 @@ public class Contribution {
     public int calculateGuilt(){
         int yearsBetweeen = (int) ChronoUnit.YEARS.between(member.getRegisterDate(), LocalDate.now());
         if (arrear){
-            guilt = yearsBetweeen * price;
+            guilt = yearsBetweeen * contributionPrice;
         }
         return guilt;
     }

@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.time.format.DateTimeFormatter;
 
 public class Member {
 
@@ -20,7 +19,6 @@ public class Member {
 
     }
 
-    DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public Member() {
         // Empty for loading data
@@ -93,7 +91,7 @@ public class Member {
     }
 
     public boolean getArrearStatus(){
-        return contribution.isInArrear();
+        return contribution.isArrear();
     }
 
     public int getOwes(){
