@@ -81,6 +81,7 @@ public class Database {
     }
 
     public void addMemberToTeam(Team team, Member member){
+        member.setTeam(team.getName());
         team.addMember(member);
         changes = true;
     }
