@@ -2,6 +2,8 @@ package UI;
 
 import Member.Member;
 import Member.MemberType;
+import Data.*;
+import Team.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -70,7 +72,7 @@ public class UserInterface {
 
         while (menuInput != 9){
             switch (profession){
-                case Profession.CHAIRMAN -> {
+                case CHAIRMAN -> {
                     System.out.println("""
                         1. Registrer medlem
                         2. Vis liste af medlemmer
@@ -108,7 +110,7 @@ public class UserInterface {
                         }
                     } while (inputError);
                 }
-                case Profession.TRAINER -> {
+                case TRAINER -> {
                     System.out.println("""
                             1. Se liste af oprettede hold
                             2. Tilføj medlem til hold
@@ -141,7 +143,7 @@ public class UserInterface {
                     } while (inputError);
 
                 }
-                case Profession.CASHIER -> {
+                case CASHIER -> {
                     System.out.println("""
                             1. Se medlemmers kontigent
                             2. Se samlet kontigent

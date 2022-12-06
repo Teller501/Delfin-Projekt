@@ -9,5 +9,20 @@ public class Result {
     private Member member;
     private String convention;
     private int placement;
+    private double time;
+
+    public Result(Member member, LocalDate date, double time){
+        this.member = member;
+        this.date = date;
+        this.time = time;
+    }
+
+    public Result(Member member, LocalDate date, double time, String convention, int placement){
+        this.member = member;
+        this.date = date;
+        this.time = time;
+        this.convention = convention;
+        this.placement = placement;
+    }
 
 }
