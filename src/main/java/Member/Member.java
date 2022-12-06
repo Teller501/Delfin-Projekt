@@ -11,6 +11,7 @@ public class Member {
     private boolean active;
     private int phoneNumber;
     private Contribution contribution = new Contribution(this);
+    private String team;
 
     public Member(String name, LocalDate birthday, LocalDate registerDate, boolean active, int phoneNumber) {
         this.name = name;
@@ -100,5 +101,13 @@ public class Member {
         return contribution.calculateGuilt();
     }
 
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
+    }
 
 }

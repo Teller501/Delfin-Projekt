@@ -27,6 +27,8 @@ public class Filehandler {
             memberOutput.print(";");
             memberOutput.print(member.isActive());
             memberOutput.print(";");
+            memberOutput.print(member.getTeam());
+            memberOutput.print(";");
             memberOutput.println();
         }
 
@@ -34,8 +36,6 @@ public class Filehandler {
             teamOutput.print(team.getName());
             teamOutput.print(";");
             teamOutput.print(team.getDisciplin());
-            teamOutput.print(";");
-            teamOutput.print(team.getMembers());
             teamOutput.print(";");
             teamOutput.println();
         }
@@ -80,6 +80,7 @@ public class Filehandler {
             dataObjekt.setRegisterDate(LocalDate.parse(parts[2]));
             dataObjekt.setPhoneNumber(Integer.parseInt(parts[3]));
             dataObjekt.setActive(Boolean.parseBoolean(parts[4]));
+            dataObjekt.setTeam(parts[5]);
             return dataObjekt;
         } catch (NumberFormatException e) {
             System.out.println("Kan ikke loade data, fejl i input");
