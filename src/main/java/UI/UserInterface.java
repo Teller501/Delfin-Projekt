@@ -271,10 +271,17 @@ public class UserInterface {
 
     private void printMembers() {
         if (!controller.getMembers().isEmpty()) {
-            System.out.println("------------------------------------------------------");
+            System.out.printf("-----------------------------------------------------------------------------------------------%n");
+            System.out.printf("| %-18s | %-10s | %8s | %13s | %12s | %15s | %n", "NAVN", "FØDSELSDAG", "TLF","MEDLEMSTYPE", "MEDLEMSSKAB", "INDMELDINGSDATO");
             for (Member member : controller.getMembers()) {
                 member.calculateMemberType();
-
+                System.out.printf("| %-18s | %-10s | %8s | %13s | %12s | %15s | %n", member.getName(),member.getBirthday().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
+                        member.getPhoneNumber(),(member.calculateMemberType() == MemberType.JUNIOR_SWIMMER ? "Juniorsvømmer" : "")
+                                + (member.calculateMemberType() == MemberType.SENIOR_SWIMMER ? "Seniorsvømmer" : "")
+                                +(member.calculateMemberType() == MemberType.PENSION_SWIMMER ? "Pensionist":""),(member.isActive() ? "Aktivt" : "Passivt"),
+                        member.getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                System.out.printf("-----------------------------------------------------------------------------------------------%n");
+                /*
                 System.out.println("Navn: " + member.getName());
                 System.out.println("Fødselsdag: " + member.getBirthday().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                 System.out.println("Telefon nr: " + member.getPhoneNumber());
@@ -282,8 +289,8 @@ public class UserInterface {
                         + (member.calculateMemberType() == MemberType.SENIOR_SWIMMER ? "Seniorsvømmer" : "")
                         +(member.calculateMemberType() == MemberType.PENSION_SWIMMER ? "Pensionist":""));
                 System.out.println("Medlemskab: " + (member.isActive() ? "Aktivt" : "Passivt"));
-                System.out.println("Indmeldingsdato: " + member.getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-                System.out.println("------------------------------------------------------");
+                System.out.println("Indmeldingsdato: " + member.getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));*/
+
             }
 
             System.out.println("Der er i øjeblikket registreret " + controller.getMembers().size() + " medlem" + (controller.getMembers().size() == 1 ? "" : "mer") + " i systemet");
