@@ -52,6 +52,8 @@ public class UserInterface {
                     case 1 -> profession = Profession.CHAIRMAN;
                     case 2 -> profession = Profession.TRAINER;
                     case 3 -> profession = Profession.CASHIER;
+
+                    case 9 -> System.exit(1);
                 }
                 inputError = false;
                 showMenu(profession);
@@ -313,7 +315,7 @@ public class UserInterface {
 
                     System.out.println("------------------------------------------------------");
                     System.out.println("Navn: " + searchResult.get(choice - 1).getName());
-                    System.out.println("Fødselsdag: " + searchResult.get(choice - 1).getBirthday() + "år");
+                    System.out.println("Fødselsdag: " + searchResult.get(choice - 1).getBirthday());
                     System.out.println("Telefon nr: " + searchResult.get(choice - 1).getPhoneNumber());
                     System.out.println("Medlemskab: " + (searchResult.get(choice - 1).isActive() ? "Aktivt" : "Passivt"));
                     System.out.println("------------------------------------------------------");
