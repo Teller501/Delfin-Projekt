@@ -281,15 +281,6 @@ public class UserInterface {
                                 +(member.calculateMemberType() == MemberType.PENSION_SWIMMER ? "Pensionist":""),(member.isActive() ? "Aktivt" : "Passivt"),
                         member.getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                 System.out.printf("-----------------------------------------------------------------------------------------------%n");
-                /*
-                System.out.println("Navn: " + member.getName());
-                System.out.println("Fødselsdag: " + member.getBirthday().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-                System.out.println("Telefon nr: " + member.getPhoneNumber());
-                System.out.println("Medlemstype: " + (member.calculateMemberType() == MemberType.JUNIOR_SWIMMER ? "Juniorsvømmer" : "")
-                        + (member.calculateMemberType() == MemberType.SENIOR_SWIMMER ? "Seniorsvømmer" : "")
-                        +(member.calculateMemberType() == MemberType.PENSION_SWIMMER ? "Pensionist":""));
-                System.out.println("Medlemskab: " + (member.isActive() ? "Aktivt" : "Passivt"));
-                System.out.println("Indmeldingsdato: " + member.getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));*/
 
             }
 
