@@ -15,6 +15,8 @@ import java.util.Scanner;
 public class UserInterface {
     Controller controller = new Controller();
     private Scanner scanner = new Scanner(System.in);
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_RESET = "\u001B[0m";
 
     public void start() {
         loadData();
@@ -272,7 +274,8 @@ public class UserInterface {
     private void printMembers() {
         if (!controller.getMembers().isEmpty()) {
             System.out.printf("-----------------------------------------------------------------------------------------------%n");
-            System.out.printf("| %-18s | %-10s | %8s | %13s | %12s | %15s | %n", "NAVN", "FØDSELSDAG", "TLF","MEDLEMSTYPE", "MEDLEMSSKAB", "INDMELDINGSDATO");
+            System.out.printf(ANSI_BLUE + "| %-18s | %-10s | %8s | %13s | %12s | %15s | %n", "NAVN", "FØDSELSDAG", "TLF","MEDLEMSTYPE", "MEDLEMSSKAB", "INDMELDINGSDATO" + ANSI_RESET);
+            System.out.printf("-----------------------------------------------------------------------------------------------%n");
             for (Member member : controller.getMembers()) {
                 member.calculateMemberType();
                 System.out.printf("| %-18s | %-10s | %8s | %13s | %12s | %15s | %n", member.getName(),member.getBirthday().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
@@ -311,7 +314,8 @@ public class UserInterface {
                     choice = Integer.parseInt(scanner.nextLine());
                     inputError = false;
                     searchResult.get(choice -1).calculateMemberType();
-                    System.out.printf("| %-18s | %-10s | %8s | %13s | %12s | %15s | %n", "NAVN", "FØDSELSDAG", "TLF","MEDLEMSTYPE", "MEDLEMSSKAB", "INDMELDINGSDATO");
+                    System.out.printf("-----------------------------------------------------------------------------------------------%n");
+                    System.out.printf(ANSI_BLUE + "| %-18s | %-10s | %8s | %13s | %12s | %15s | %n", "NAVN", "FØDSELSDAG", "TLF","MEDLEMSTYPE", "MEDLEMSSKAB", "INDMELDINGSDATO" + ANSI_RESET);
                     System.out.printf("-----------------------------------------------------------------------------------------------%n");
                     System.out.printf("| %-18s | %-10s | %8s | %13s | %12s | %15s | %n", searchResult.get(choice - 1).getName(),searchResult.get(choice - 1).getBirthday().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
                             searchResult.get(choice - 1).getPhoneNumber(),(searchResult.get(choice -1).calculateMemberType() ==MemberType.JUNIOR_SWIMMER ? "Juniorsvømmer" : "")
