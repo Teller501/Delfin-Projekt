@@ -114,6 +114,7 @@ public class UserInterface {
                     System.out.println("""
                             1. Se liste af oprettede hold
                             2. Tilføj medlem til hold
+                            3. Tilføj resultat til medlem
                             
                             7. Gem data
                             8. Gå tilbage til start
@@ -128,6 +129,7 @@ public class UserInterface {
                             switch (menuInput) {
                                 case 1 -> viewTeams();
                                 case 2 -> addMemberToTeam();
+                                case 3 -> addResult();
 
                                 case 7 -> saveData();
                                 case 8 -> printWelcome();
@@ -381,7 +383,7 @@ public class UserInterface {
                     }
                     inputError = false;
                 } catch (NumberFormatException | DateTimeParseException e) {
-                    System.out.println("Indtast venligst en gyldig dato! - Benyt denne format: dd-MM-yyyy");
+                    System.out.println("Indtast venligst en gyldig dato! - Benyt dette format: dd-MM-yyyy");
                     inputError = true;
                 }
             } while (inputError);
@@ -578,5 +580,116 @@ public class UserInterface {
 
             System.out.println(memberChosen.getName() + " er tilføjet til " + teamChosen.getName());
         }
+    }
+
+    // Adds results of member to the specific team
+    private void addResult(){
+        int teamIndex = 1;
+        for (Team team : controller.getTeams()){
+            System.out.println(teamIndex++ + ": " + team.getName());
+        }
+
+        System.out.println("Vælg det hold du vil tilføje resultater til: ");
+
+        int teamChoice = 1;
+        teamChoice = Integer.parseInt(scanner.nextLine());
+        Team teamChosen = controller.getTeams().get(teamChoice - 1);
+
+
+        int memberIndex = 1;
+        if (!teamChosen.getMembers().isEmpty()){
+            for (Member member : teamChosen.getMembers()){
+                System.out.println(memberIndex++ + ": " + member.getName());
+            }
+        }else{
+            System.out.println("Ingen medlemmer på holdet");
+        }
+
+        System.out.println("Vælg medlemmet du vil tilføje et resultat til: ");
+        int memberChoice = Integer.parseInt(scanner.nextLine());
+        Member memberChosen = teamChosen.getMembers().get(memberChoice-1);
+
+
+        System.out.println("""
+                1. Træningsresultat
+                2. Konkurrenceresultat""");
+
+        int resultType = Integer.parseInt(scanner.nextLine());
+
+        switch(resultType){
+            case 1-> {
+                LocalDate resultDate = getResultDate();
+
+                double time = getTime();
+
+                controller.addTrainingResult(memberChosen, resultDate, time, teamChosen);
+                System.out.println("Tid er tilføjet til " + memberChosen.getName());
+            }
+            case 2->{
+                LocalDate resultDate = getResultDate();
+
+                double time = getTime();
+
+                System.out.println("Angiv hvilket stævne " + memberChosen.getName() + " deltog til");
+                String convention = scanner.nextLine();
+
+                int placement = 0;
+                boolean placementError;
+
+                do {
+                    try{
+                        System.out.println("Angiv " + memberChosen.getName() + "s placering til stævnet");
+                        placement = Integer.parseInt(scanner.nextLine());
+                        placementError = false;
+                    }catch(NumberFormatException e){
+                        System.out.println("Ugyldigt input, prøv venligst igen!");
+                        placementError = true;
+                    }
+                }while(placementError);
+
+                controller.addCompetitionResult(memberChosen, resultDate, time, convention, placement, teamChosen);
+
+                System.out.println("Tid er registreret for " + memberChosen.getName());
+
+            }
+            default -> System.out.println("Ugyldigt input, prøv igen!");
+        }
+    }
+
+    // Extracted method for getting time for results
+    private double getTime() {
+        double time = 0;
+        boolean timeError;
+
+        do {
+            try{
+                System.out.println("Skriv medlemmets målte tid (mm.ss): ");
+                time = Double.parseDouble(scanner.nextLine());
+                timeError = false;
+            }catch (NumberFormatException e){
+                System.out.println("Ugyldigt tidsinput, prøv venligst igen!");
+                timeError = true;
+            }
+        }while(timeError);
+        return time;
+    }
+
+    // Extracted method for getting date for results
+    private LocalDate getResultDate() {
+        LocalDate resultDate = LocalDate.now();
+        boolean resultDateError;
+
+        do{
+            try {
+                System.out.println("Vælg dato for resultatet (dd-MM-yyyy): ");
+                resultDate = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                resultDateError = false;
+            }catch (NumberFormatException | DateTimeParseException e){
+                System.out.println("Ugyldig resultatsdato, prøv venligst igen!");
+                resultDateError = true;
+            }
+
+        }while(resultDateError);
+        return resultDate;
     }
 }
