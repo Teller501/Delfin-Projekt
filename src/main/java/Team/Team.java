@@ -60,4 +60,12 @@ public class Team {
         Result result = new Result(member,date,time, convention, placement);
         competitionResults.add(result);
     }
+
+    public ArrayList<Result> getCompetitionResults() {
+        return competitionResults;
+    }
+
+    public ArrayList<Result> getTrainingResults() {
+        return trainingResults;
+    }
 }

@@ -545,16 +545,7 @@ public class UserInterface {
     }
 
     private void addMemberToTeam(){
-        int index = 1;
-        for (Team team : controller.getTeams()){
-            System.out.println(index++ + ": " + team.getName());
-        }
-
-        System.out.println("Vælg det hold du vil tilføje et medlem til: ");
-
-        int teamChoice = 1;
-        teamChoice = Integer.parseInt(scanner.nextLine());
-        Team teamChosen = controller.getTeams().get(teamChoice - 1);
+        Team teamChosen = getTeam();
         System.out.println("Tilføjer til: " + teamChosen.getName());
 
         System.out.println("Indtast søgeord for medlemmet du vil tilføje: ");
@@ -562,10 +553,10 @@ public class UserInterface {
 
         ArrayList<Member> searchResults = controller.searchForMember(searchTerm);
 
+        int index = 1;
         if (searchResults.isEmpty()) {
             System.out.println("Ingen fundet");
         }else{
-            index = 1;
             for (Member searchResult : searchResults) {
                 System.out.println(index++ + ": " + searchResult.getName());
             }
@@ -584,30 +575,10 @@ public class UserInterface {
 
     // Adds results of member to the specific team
     private void addResult(){
-        int teamIndex = 1;
-        for (Team team : controller.getTeams()){
-            System.out.println(teamIndex++ + ": " + team.getName());
-        }
-
-        System.out.println("Vælg det hold du vil tilføje resultater til: ");
-
-        int teamChoice = 1;
-        teamChoice = Integer.parseInt(scanner.nextLine());
-        Team teamChosen = controller.getTeams().get(teamChoice - 1);
+        Team teamChosen = getTeam();
 
 
-        int memberIndex = 1;
-        if (!teamChosen.getMembers().isEmpty()){
-            for (Member member : teamChosen.getMembers()){
-                System.out.println(memberIndex++ + ": " + member.getName());
-            }
-        }else{
-            System.out.println("Ingen medlemmer på holdet");
-        }
-
-        System.out.println("Vælg medlemmet du vil tilføje et resultat til: ");
-        int memberChoice = Integer.parseInt(scanner.nextLine());
-        Member memberChosen = teamChosen.getMembers().get(memberChoice-1);
+        Member memberChosen = getMember(teamChosen);
 
 
         System.out.println("""
@@ -654,6 +625,37 @@ public class UserInterface {
             }
             default -> System.out.println("Ugyldigt input, prøv igen!");
         }
+    }
+
+    private Member getMember(Team teamChosen) {
+        int memberIndex = 1;
+        if (!teamChosen.getMembers().isEmpty()){
+            for (Member member : teamChosen.getMembers()){
+                System.out.println(memberIndex++ + ": " + member.getName());
+            }
+        }else{
+            System.out.println("Ingen medlemmer på holdet");
+        }
+
+        System.out.println("Vælg medlemmet du vil tilføje et resultat til: ");
+        int memberChoice = Integer.parseInt(scanner.nextLine());
+        Member memberChosen = teamChosen.getMembers().get(memberChoice-1);
+        return memberChosen;
+    }
+
+    // Extracted method for getting team
+    private Team getTeam() {
+        int teamIndex = 1;
+        for (Team team : controller.getTeams()){
+            System.out.println(teamIndex++ + ": " + team.getName());
+        }
+
+        System.out.println("Vælg det hold du vil tilføje resultater til: ");
+
+        int teamChoice = 1;
+        teamChoice = Integer.parseInt(scanner.nextLine());
+        Team teamChosen = controller.getTeams().get(teamChoice - 1);
+        return teamChosen;
     }
 
     // Extracted method for getting time for results
