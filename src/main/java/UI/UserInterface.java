@@ -310,13 +310,15 @@ public class UserInterface {
                 try {
                     choice = Integer.parseInt(scanner.nextLine());
                     inputError = false;
-
-                    System.out.println("------------------------------------------------------");
-                    System.out.println("Navn: " + searchResult.get(choice - 1).getName());
-                    System.out.println("Fødselsdag: " + searchResult.get(choice - 1).getBirthday());
-                    System.out.println("Telefon nr: " + searchResult.get(choice - 1).getPhoneNumber());
-                    System.out.println("Medlemskab: " + (searchResult.get(choice - 1).isActive() ? "Aktivt" : "Passivt"));
-                    System.out.println("------------------------------------------------------");
+                    searchResult.get(choice -1).calculateMemberType();
+                    System.out.printf("| %-18s | %-10s | %8s | %13s | %12s | %15s | %n", "NAVN", "FØDSELSDAG", "TLF","MEDLEMSTYPE", "MEDLEMSSKAB", "INDMELDINGSDATO");
+                    System.out.printf("-----------------------------------------------------------------------------------------------%n");
+                    System.out.printf("| %-18s | %-10s | %8s | %13s | %12s | %15s | %n", searchResult.get(choice - 1).getName(),searchResult.get(choice - 1).getBirthday().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
+                            searchResult.get(choice - 1).getPhoneNumber(),(searchResult.get(choice -1).calculateMemberType() ==MemberType.JUNIOR_SWIMMER ? "Juniorsvømmer" : "")
+                                    + (searchResult.get(choice -1).calculateMemberType() ==MemberType.SENIOR_SWIMMER ? "Seniorsvømmer" : "")
+                                    +(searchResult.get(choice -1).calculateMemberType() ==MemberType.PENSION_SWIMMER ? "Pensionist" : ""),(searchResult.get(choice -1).isActive() ? "Aktivt" : "Passivt"),
+                                    searchResult.get(choice -1).getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                    System.out.printf("-----------------------------------------------------------------------------------------------%n");
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
                     System.out.println("Input ikke gyldigt, prøv venligst igen!");
                     inputError = true;
