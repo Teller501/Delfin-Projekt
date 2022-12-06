@@ -71,4 +71,12 @@ public class Controller {
         team.addMember(member);
         isChanges();
     }*/
+
+    public void addTrainingResult(Member member, LocalDate date, double time, Team team){
+        database.addTrainingResult(member,date,time,team);
+    }
+
+    public void addCompetitionResult(Member member, LocalDate date, double time, String convention, int placement, Team team){
+        database.addCompetitionResult(member,date,time,convention,placement,team);
+    }
 }

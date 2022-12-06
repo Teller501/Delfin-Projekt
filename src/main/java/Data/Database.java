@@ -85,4 +85,12 @@ public class Database {
         changes = true;
     }
 
+    public void addTrainingResult(Member member, LocalDate date, double time, Team team){
+        team.addTrainingResult(member,date,time);
+    }
+
+    public void addCompetitionResult(Member member, LocalDate date, double time, String convention, int placement, Team team){
+        team.addCompetitionResult(member,date,time,convention,placement);
+    }
+
 }

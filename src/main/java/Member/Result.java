@@ -25,4 +25,44 @@ public class Result {
         this.placement = placement;
     }
 
+
+    public Member getMember() {
+        return member;
+    }
+
+    public double getTime() {
+        return time;
+    }
+
+    public int getPlacement() {
+        return placement;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public String getConvention() {
+        return convention;
+    }
+
+    public void setConvention(String convention) {
+        this.convention = convention;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    public void setPlacement(int placement) {
+        this.placement = placement;
+    }
+
+    public void setTime(double time) {
+        this.time = time;
+    }
 }
