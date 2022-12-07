@@ -1,6 +1,4 @@
-package Member;
-
-import Member.Member;
+package member;
 
 import java.time.LocalDate;
 

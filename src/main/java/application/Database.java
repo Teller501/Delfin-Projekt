@@ -1,17 +1,17 @@
-package Data;
+package application;
 
-import Member.Member;
+import member.Member;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import Team.*;
+import team.*;
 
 public class Database {
     private ArrayList<Member> members = new ArrayList<>();
     private ArrayList<Team> teams = new ArrayList<>();
     private boolean changes = false;
-    DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public Database(){
     }

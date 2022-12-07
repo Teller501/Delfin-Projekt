@@ -1,9 +1,9 @@
-package UI;
+package ui;
 
-import Member.Member;
-import Member.MemberType;
-import Data.*;
-import Team.*;
+import member.Member;
+import member.MemberType;
+import application.*;
+import team.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +13,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UserInterface {
-    Controller controller = new Controller();
+    private Controller controller = new Controller();
     private Scanner scanner = new Scanner(System.in);
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_RESET = "\u001B[0m";

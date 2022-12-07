@@ -1,4 +1,4 @@
-package Member;
+package member;
 
 public enum MemberType {
     JUNIOR_SWIMMER,

@@ -1,17 +1,15 @@
-package Data;
+package application;
 
-import Data.Database;
-import Data.Filehandler;
-import Member.Member;
-import Team.*;
+import member.Member;
+import team.*;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Controller {
-    public Database database = new Database();
-    Filehandler fileHandler = new Filehandler();
+    public class Controller {
+        public Database database = new Database();
+   public Filehandler fileHandler = new Filehandler();
 
     public void registerMember(String name, LocalDate birthday,LocalDate registerDate , boolean isActive, int phoneNumber) {
         database.registerMember(name, birthday, registerDate, isActive, phoneNumber);

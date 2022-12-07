@@ -1,6 +1,6 @@
-package Team;
+package team;
 
-import Member.*;
+import member.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

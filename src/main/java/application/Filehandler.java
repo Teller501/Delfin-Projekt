@@ -1,7 +1,7 @@
-package Data;
+package application;
 
-import Member.Member;
-import Team.Team;
+import member.Member;
+import team.Team;
 
 import java.io.File;
 import java.io.FileNotFoundException;

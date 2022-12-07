@@ -1,6 +1,5 @@
-import Data.Controller;
-import Data.Database;
-import Member.Member;
+import application.Controller;
+import member.Member;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
