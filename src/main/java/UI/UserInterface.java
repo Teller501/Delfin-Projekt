@@ -1,6 +1,7 @@
 package UI;
 
 import Member.Member;
+import Member.Result;
 import Member.MemberType;
 import Data.*;
 import Team.*;
@@ -119,6 +120,7 @@ public class UserInterface {
                             1. Se liste af oprettede hold
                             2. Tilføj medlem til hold
                             3. Tilføj resultat til medlem
+                            4. Se top 5 resultater
                             
                             7. Gem data
                             8. Gå tilbage til start
@@ -134,6 +136,7 @@ public class UserInterface {
                                 case 1 -> viewTeams();
                                 case 2 -> addMemberToTeam();
                                 case 3 -> addResult();
+                                case 4 -> getTop5();
 
                                 case 7 -> saveData();
                                 case 8 -> printWelcome();
@@ -196,58 +199,12 @@ public class UserInterface {
         String name = scanner.nextLine();
 
 
-        LocalDate birthday = LocalDate.now();
-        boolean birthdayInputError;
+        LocalDate birthday = getDate("Indtast medlemmets fødselsdato: (dd-mm-yyyy) ");
 
-        do {
-            try {
-                System.out.println("Indtast medlemmets fødselsdato: (dd-mm-yyyy)");
-                birthday = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                birthdayInputError = false;
-            } catch (NumberFormatException | DateTimeParseException e) {
-                System.out.println("Ugyldig fødselsdato, prøv venligst igen!");
-                birthdayInputError = true;
-            }
-        } while (birthdayInputError);
-
-        LocalDate registerDate = LocalDate.now();
-        boolean registerDateInputError;
-
-        do {
-            try {
-                System.out.println("Indtast medlemmets indmeldingsdato: (dd-mm-yyyy)");
-                registerDate = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                registerDateInputError = false;
-            } catch (NumberFormatException | DateTimeParseException e) {
-                System.out.println("Ugyldig fødselsdato, prøv venligst igen!");
-                registerDateInputError = true;
-            }
-        } while (registerDateInputError);
+        LocalDate registerDate = getDate("Indtast medlemmets indmeldingsdato: (dd-mm-yyyy) ");
 
 
-        // When typing a phonenumber, it checks if the number is 8 digits (danish number)
-        String phoneNumberInput = "";
-        int phoneNumber = 0;
-        boolean phoneNumberInputError;
-
-        do{
-            try{
-                System.out.println("Indtast medlemmets telefon-nr: ");
-                phoneNumberInput = scanner.nextLine();
-
-                if (phoneNumberInput.length() == 8){
-                    phoneNumber = Integer.parseInt(phoneNumberInput);
-                    phoneNumberInputError = false;
-                }else {
-                    System.out.println("Du skal indtaste 8 cifre! ");
-                    phoneNumberInputError = true;
-                }
-
-            } catch (NumberFormatException e){
-                System.out.println("Input er ugyldigt, prøv venligst igen!");
-                phoneNumberInputError = true;
-            }
-        }while(phoneNumberInputError);
+        int phoneNumber = getPhoneNumber();
 
         // Checking if the right word is typed when asked about membership status
         boolean isActive = true;
@@ -374,59 +331,24 @@ public class UserInterface {
 
             System.out.println("Indtast data der skal ændres og klik ENTER. Skal data ikke ændres, klik blot ENTER.");
 
-            System.out.println("Fornavn: " + editMember.getName());
+            System.out.println("Navn: " + editMember.getName());
             String newName = scanner.nextLine();
             if (!newName.isEmpty()) {
                 editMember.setName(newName);
             }
 
             System.out.println("Fødselsdato: " + editMember.getBirthday().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-            do {
-                try {
-                    String newBirthDay = scanner.nextLine();
-                    if (!newBirthDay.isEmpty()) {
-                        editMember.setBirthday(LocalDate.parse(newBirthDay,DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-                    }
-                    inputError = false;
-                } catch (NumberFormatException | DateTimeParseException e) {
-                    System.out.println("Indtast venligst en gyldig dato! - Benyt dette format: dd-MM-yyyy");
-                    inputError = true;
-                }
-            } while (inputError);
+            LocalDate newBirthDay = getDate("Ny fødselsdato: (dd-MM-yyy");
+            editMember.setBirthday(newBirthDay);
 
 
             System.out.println("Indmeldelsesdato: " + editMember.getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-            do {
-                try{
-                    String newRegisterDate = scanner.nextLine();
-                    if (!newRegisterDate.isEmpty()) {
-                        editMember.setBirthday(LocalDate.parse(newRegisterDate, DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-                    }
-                    inputError = false;
-                }catch (NumberFormatException | DateTimeParseException e){
-                    System.out.println("Indtast venligst en gyldig dato! - Benyt denne format: dd-MM-yyyy");
-                    inputError = true;
-                }
-            }while(inputError);
+            LocalDate newRegisterDate = getDate("Ny indmeldingsdato: (dd-MM-yyyy");
+            editMember.setRegisterDate(newRegisterDate);
 
             System.out.println("Telefon-nr: " + (editMember.getPhoneNumber()));
-            do {
-                try {
-                    String newPhoneNumber = scanner.nextLine().trim();
-                    if (!newPhoneNumber.isEmpty()) {
-                        if (newPhoneNumber.length() == 8) {
-                            editMember.setPhoneNumber(Integer.parseInt(newPhoneNumber));
-                            inputError = false;
-                        } else {
-                            System.out.println("Du skal indtaste 8 cifre! ");
-                            inputError = true;
-                        }
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Indtast venligst et gyldigt telefon-nr! - Skal være 8 tal.");
-                    inputError = true;
-                }
-            } while (inputError);
+            int phoneNumber = getPhoneNumber();
+            editMember.setPhoneNumber(phoneNumber);
 
 
             System.out.println("Medlemskabsstatus: " + (editMember.isActive() ? "Aktivt" : "Passivt"));
@@ -512,17 +434,6 @@ public class UserInterface {
         }
     }
 
-
-    //Kan laves som extra detalje hvis vi har tid til over:
-    private int getValidNumber(int min, int max) {
-        // har en try catch og while, indtil der er indtastet noget gyldigt mellem min og max
-        try {
-        }
-        catch (IndexOutOfBoundsException | NumberFormatException e) {
-        }
-        return 0; // returnerer det gyldige indtastede
-    }
-
     private void viewTeams(){
         ArrayList<Team> teams = controller.getTeams();
 
@@ -551,7 +462,7 @@ public class UserInterface {
     }
 
     private void addMemberToTeam(){
-        Team teamChosen = getTeam();
+        Team teamChosen = getTeam("Vælg det hold du vil tilføje medlememr til: ");
         System.out.println("Tilføjer til: " + teamChosen.getName());
 
         System.out.println("Indtast søgeord for medlemmet du vil tilføje: ");
@@ -581,7 +492,7 @@ public class UserInterface {
 
     // Adds results of member to the specific team
     private void addResult(){
-        Team teamChosen = getTeam();
+        Team teamChosen = getTeam("Vælg det hold du vil tilføje resultater til: ");
 
 
         Member memberChosen = getMember(teamChosen);
@@ -595,7 +506,7 @@ public class UserInterface {
 
         switch(resultType){
             case 1-> {
-                LocalDate resultDate = getResultDate();
+                LocalDate resultDate = getDate("Vælg dato for resultatet (dd-MM-yyyy): ");
 
                 double time = getTime();
 
@@ -603,7 +514,7 @@ public class UserInterface {
                 System.out.println("Tid er tilføjet til " + memberChosen.getName());
             }
             case 2->{
-                LocalDate resultDate = getResultDate();
+                LocalDate resultDate = getDate("Vælg dato for resultatet (dd-MM-yyyy): ");
 
                 double time = getTime();
 
@@ -633,6 +544,30 @@ public class UserInterface {
         }
     }
 
+    private void getTop5(){
+        Team team = getTeam("Vælg det hold du vil se top 5 resultater for: ");
+        ArrayList<Result> sortedTrainingResults = controller.sortTrainingResults(team);
+        ArrayList<Result> sortedCompetitionResults = controller.sortCompetitionResults(team);
+
+        System.out.println("Træningsresultater for " + team.getName());
+        if (!sortedCompetitionResults.isEmpty()){
+            for (Result result : sortedTrainingResults){
+                System.out.println(result.getMember().getName() + " " + result.getTime() + " " + result.getDate());
+            }
+        }else{
+            System.out.println("Der er ingen træningsresultater på " + team.getName());
+        }
+
+        System.out.println("Konkurrenceresultater for " + team.getName());
+        if (!sortedCompetitionResults.isEmpty()){
+            for (Result result : sortedCompetitionResults){
+                System.out.println(result.getMember().getName() + " " + result.getTime() + " " + result.getDate());
+            }
+        }else{
+            System.out.println("Der er ingen konkurrenceresultater på " + team.getName());
+        }
+    }
+
     private Member getMember(Team teamChosen) {
         int memberIndex = 1;
         if (!teamChosen.getTeamMembers().isEmpty()){
@@ -650,13 +585,13 @@ public class UserInterface {
     }
 
     // Extracted method for getting team
-    private Team getTeam() {
+    private Team getTeam(String message) {
         int teamIndex = 1;
         for (Team team : controller.getTeams()){
             System.out.println(teamIndex++ + ": " + team.getName());
         }
 
-        System.out.println("Vælg det hold du vil tilføje resultater til: ");
+        System.out.println(message);
 
         int teamChoice = 1;
         teamChoice = Integer.parseInt(scanner.nextLine());
@@ -683,21 +618,48 @@ public class UserInterface {
     }
 
     // Extracted method for getting date for results
-    private LocalDate getResultDate() {
-        LocalDate resultDate = LocalDate.now();
-        boolean resultDateError;
+    private LocalDate getDate(String message) {
+        LocalDate date = LocalDate.now();
+        boolean dateError;
 
         do{
             try {
-                System.out.println("Vælg dato for resultatet (dd-MM-yyyy): ");
-                resultDate = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                resultDateError = false;
+                System.out.println(message);
+                date = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                dateError = false;
             }catch (NumberFormatException | DateTimeParseException e){
-                System.out.println("Ugyldig resultatsdato, prøv venligst igen!");
-                resultDateError = true;
+                System.out.println("Ugyldig dato, prøv venligst igen!");
+                dateError = true;
             }
 
-        }while(resultDateError);
-        return resultDate;
+        }while(dateError);
+        return date;
+    }
+
+    private int getPhoneNumber() {
+        // When typing a phonenumber, it checks if the number is 8 digits (danish number)
+        String phoneNumberInput = "";
+        int phoneNumber = 0;
+        boolean phoneNumberInputError;
+
+        do{
+            try{
+                System.out.println("Indtast medlemmets telefon-nr: ");
+                phoneNumberInput = scanner.nextLine();
+
+                if (phoneNumberInput.length() == 8){
+                    phoneNumber = Integer.parseInt(phoneNumberInput);
+                    phoneNumberInputError = false;
+                }else {
+                    System.out.println("Du skal indtaste 8 cifre! ");
+                    phoneNumberInputError = true;
+                }
+
+            } catch (NumberFormatException e){
+                System.out.println("Input er ugyldigt, prøv venligst igen!");
+                phoneNumberInputError = true;
+            }
+        }while(phoneNumberInputError);
+        return phoneNumber;
     }
 }

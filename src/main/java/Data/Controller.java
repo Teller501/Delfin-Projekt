@@ -3,11 +3,15 @@ package Data;
 import Data.Database;
 import Data.Filehandler;
 import Member.Member;
+import Member.*;
 import Team.*;
+import Comparator.*;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Controller {
     public Database database = new Database();
@@ -74,5 +78,18 @@ public class Controller {
 
     public void addCompetitionResult(Member member, LocalDate date, double time, String convention, int placement, Team team){
         database.addCompetitionResult(member,date,time,convention,placement,team);
+    }
+
+    // Sorting results by time
+    public ArrayList<Result> sortTrainingResults(Team team){
+        Comparator comparator = new TimeComparator();
+        database.getTrainingResults(team).sort(comparator);
+        return database.getTrainingResults(team);
+    }
+
+    public ArrayList<Result> sortCompetitionResults(Team team){
+        Comparator comparator = new TimeComparator();
+        database.getCompetitionResults(team).sort(comparator);
+        return database.getCompetitionResults(team);
     }
 }
