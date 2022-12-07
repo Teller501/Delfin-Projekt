@@ -23,11 +23,11 @@ public class Contribution {
         if (!member.isActive()){
             contributionPrice = 500;
         }else{
-            if (member.calculateMemberType() == MemberType.JUNIOR_SWIMMER){
+            if (member.calculateMemberType() == Member.MemberType.JUNIOR_SWIMMER){
                 contributionPrice = 1000;
-            }else if(member.calculateMemberType() == MemberType.SENIOR_SWIMMER){
+            }else if(member.calculateMemberType() == Member.MemberType.SENIOR_SWIMMER){
                 contributionPrice = 1600;
-            }else if (member.calculateMemberType() == MemberType.PENSION_SWIMMER){
+            }else if (member.calculateMemberType() == Member.MemberType.PENSION_SWIMMER){
                 contributionPrice = 1200;
             }
         }

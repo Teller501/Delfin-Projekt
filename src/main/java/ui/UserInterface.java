@@ -1,7 +1,6 @@
 package ui;
 
 import member.Member;
-import member.MemberType;
 import application.*;
 import team.*;
 import member.Result;
@@ -236,9 +235,9 @@ public class UserInterface {
             for (Member member : controller.getMembers()) {
                 member.calculateMemberType();
                 System.out.printf("| %-18s | %-10s | %8s | %13s | %12s | %15s | %n", member.getName(),member.getBirthday().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
-                        member.getPhoneNumber(),(member.calculateMemberType() == MemberType.JUNIOR_SWIMMER ? "Juniorsvømmer" : "")
-                                + (member.calculateMemberType() == MemberType.SENIOR_SWIMMER ? "Seniorsvømmer" : "")
-                                +(member.calculateMemberType() == MemberType.PENSION_SWIMMER ? "Pensionist":""),(member.isActive() ? "Aktivt" : "Passivt"),
+                        member.getPhoneNumber(),(member.calculateMemberType() == Member.MemberType.JUNIOR_SWIMMER ? "Juniorsvømmer" : "")
+                                + (member.calculateMemberType() == Member.MemberType.SENIOR_SWIMMER ? "Seniorsvømmer" : "")
+                                +(member.calculateMemberType() == Member.MemberType.PENSION_SWIMMER ? "Pensionist":""),(member.isActive() ? "Aktivt" : "Passivt"),
                         member.getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                 System.out.printf("-----------------------------------------------------------------------------------------------%n");
 
@@ -275,9 +274,9 @@ public class UserInterface {
                     System.out.printf(ANSI_BLUE + "| %-18s | %-10s | %8s | %13s | %12s | %15s | %n", "NAVN", "FØDSELSDAG", "TLF","MEDLEMSTYPE", "MEDLEMSSKAB", "INDMELDINGSDATO" + ANSI_RESET);
                     System.out.printf("-----------------------------------------------------------------------------------------------%n");
                     System.out.printf("| %-18s | %-10s | %8s | %13s | %12s | %15s | %n", searchResult.get(choice - 1).getName(),searchResult.get(choice - 1).getBirthday().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
-                            searchResult.get(choice - 1).getPhoneNumber(),(searchResult.get(choice -1).calculateMemberType() ==MemberType.JUNIOR_SWIMMER ? "Juniorsvømmer" : "")
-                                    + (searchResult.get(choice -1).calculateMemberType() ==MemberType.SENIOR_SWIMMER ? "Seniorsvømmer" : "")
-                                    +(searchResult.get(choice -1).calculateMemberType() ==MemberType.PENSION_SWIMMER ? "Pensionist" : ""),(searchResult.get(choice -1).isActive() ? "Aktivt" : "Passivt"),
+                            searchResult.get(choice - 1).getPhoneNumber(),(searchResult.get(choice -1).calculateMemberType() ==Member.MemberType.JUNIOR_SWIMMER ? "Juniorsvømmer" : "")
+                                    + (searchResult.get(choice -1).calculateMemberType() ==Member.MemberType.SENIOR_SWIMMER ? "Seniorsvømmer" : "")
+                                    +(searchResult.get(choice -1).calculateMemberType() ==Member.MemberType.PENSION_SWIMMER ? "Pensionist" : ""),(searchResult.get(choice -1).isActive() ? "Aktivt" : "Passivt"),
                                     searchResult.get(choice -1).getRegisterDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                     System.out.printf("-----------------------------------------------------------------------------------------------%n");
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
@@ -568,6 +567,7 @@ public class UserInterface {
         }
     }
 
+    //Extracted method for getting members
     private Member getMember(Team teamChosen) {
         int memberIndex = 1;
         if (!teamChosen.getTeamMembers().isEmpty()){

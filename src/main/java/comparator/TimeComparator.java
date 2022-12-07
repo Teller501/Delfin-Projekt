@@ -1,6 +1,6 @@
 package comparator;
 
-import Member.Result;
+import member.Result;
 
 import java.util.Comparator;
 

@@ -6,6 +6,11 @@ import java.util.ArrayList;
 
 public class Member {
 
+    public enum MemberType {
+        JUNIOR_SWIMMER,
+        SENIOR_SWIMMER,
+        PENSION_SWIMMER
+    }
     private String name;
     private LocalDate birthday;
     private LocalDate registerDate;
@@ -82,11 +87,11 @@ public class Member {
 
     public MemberType calculateMemberType(){
         if (calculateAge() < 18){
-            return MemberType.JUNIOR_SWIMMER;
+            return Member.MemberType.JUNIOR_SWIMMER;
         }else if(calculateAge() > 60){
-            return MemberType.PENSION_SWIMMER;
+            return Member.MemberType.PENSION_SWIMMER;
         }else{
-            return MemberType.SENIOR_SWIMMER;
+            return Member.MemberType.SENIOR_SWIMMER;
         }
     }
 
@@ -110,5 +115,6 @@ public class Member {
     public void setTeam(String team) {
         this.team = team;
     }
+
 
 }
