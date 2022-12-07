@@ -554,17 +554,20 @@ public class UserInterface {
         ArrayList<Result> sortedCompetitionResults = controller.sortCompetitionResults(team);
 
         System.out.println("Træningsresultater for " + team.getName());
-        if (!sortedCompetitionResults.isEmpty()){
-            for (Result result : sortedTrainingResults){
+        if (!sortedTrainingResults.isEmpty()){
+            for(int i = 0; i< 5; i++){
+                Result result = sortedTrainingResults.get(i);
                 System.out.println(result.getMember().getName() + " " + result.getTime() + " " + result.getDate());
             }
         }else{
             System.out.println("Der er ingen træningsresultater på " + team.getName());
         }
 
+        System.out.println();
         System.out.println("Konkurrenceresultater for " + team.getName());
         if (!sortedCompetitionResults.isEmpty()){
-            for (Result result : sortedCompetitionResults){
+            for(int i = 0; i< 5; i++){
+                Result result = sortedCompetitionResults.get(i);
                 System.out.println(result.getMember().getName() + " " + result.getTime() + " " + result.getDate());
             }
         }else{
