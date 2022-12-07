@@ -466,10 +466,7 @@ public class UserInterface {
     }
 
     private void addMemberToTeam(){
-        Team teamChosen = getTeam("Vælg det hold du vil tilføje medlememr til: ");
-        System.out.println("Tilføjer til: " + teamChosen.getName());
-
-        System.out.println("Indtast søgeord for medlemmet du vil tilføje: ");
+        System.out.println("Indtast søgeord for medlemmet du vil tilføje til et hold: ");
         String searchTerm = scanner.nextLine();
 
         ArrayList<Member> searchResults = controller.searchForMember(searchTerm);
@@ -477,7 +474,7 @@ public class UserInterface {
         int index = 1;
         if (searchResults.isEmpty()) {
             System.out.println("Ingen fundet");
-        }else{
+        }else {
             for (Member searchResult : searchResults) {
                 System.out.println(index++ + ": " + searchResult.getName());
             }
@@ -488,10 +485,50 @@ public class UserInterface {
             memberChoice = Integer.parseInt(scanner.nextLine());
             Member memberChosen = searchResults.get(memberChoice - 1);
 
-            controller.addMemberToTeam(teamChosen, memberChosen);
+            if (memberChosen.calculateAge() < 18) {
+                Team teamChosen = getJuniorTeam();
+                System.out.println("Tilføjer til: " + teamChosen.getName());
+                controller.addMemberToTeam(teamChosen, memberChosen);
+                System.out.println(memberChosen.getName() + " er tilføjet til " + teamChosen.getName());
+            }
 
-            System.out.println(memberChosen.getName() + " er tilføjet til " + teamChosen.getName());
+            else {
+                Team teamChosen = getSeniorTeam();
+                System.out.println("Tilføjer til: " + teamChosen.getName());
+                controller.addMemberToTeam(teamChosen, memberChosen);
+                System.out.println(memberChosen.getName() + " er tilføjet til " + teamChosen.getName());
+            }
+
+
         }
+    }
+
+    private Team getJuniorTeam() {
+        int teamIndex = 1;
+        for (Team team : controller.getTeams()){
+            if (team.getName().contains("u-18")) {
+                System.out.println(teamIndex++ + ": " + team.getName());
+            }
+        }
+        System.out.println("Vælg det juniorhold du vil tilføje medlemmet til: ");
+
+        int teamChoice = 1;
+        teamChoice = Integer.parseInt(scanner.nextLine());
+        return controller.getTeams().get(teamChoice - 1);
+    }
+
+    private Team getSeniorTeam() {
+        int teamIndex = 5;
+        for (Team team : controller.getTeams()){
+            if (team.getName().contains("Senior")) {
+                System.out.println(teamIndex++ + ": " + team.getName());
+            }
+        }
+        System.out.println("Vælg det seniorhold du vil tilføje medlemmet til: ");
+
+        int teamChoice = 1;
+        teamChoice = Integer.parseInt(scanner.nextLine());
+        return controller.getTeams().get(teamChoice - 1);
     }
 
     // Adds results of member to the specific team
