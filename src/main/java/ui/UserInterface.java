@@ -17,6 +17,11 @@ public class UserInterface {
     private Scanner scanner = new Scanner(System.in);
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_RESET = "\u001B[0m";
+    public enum Profession {
+        CHAIRMAN,
+        TRAINER,
+        CASHIER
+    }
 
     public void start() {
         loadData();
@@ -51,9 +56,9 @@ public class UserInterface {
                 scanner.nextLine();
 
                 switch (menuInput) {
-                    case 1 -> profession = Profession.CHAIRMAN;
-                    case 2 -> profession = Profession.TRAINER;
-                    case 3 -> profession = Profession.CASHIER;
+                    case 1 -> profession = UserInterface.Profession.CHAIRMAN;
+                    case 2 -> profession = UserInterface.Profession.TRAINER;
+                    case 3 -> profession = UserInterface.Profession.CASHIER;
 
                     case 9 -> System.exit(1);
                 }
