@@ -1,4 +1,4 @@
-package Comparator;
+package comparator;
 
 import Member.Result;
 

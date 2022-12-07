@@ -7,7 +7,7 @@ import application.Filehandler;
 import member.Member;
 import member.*;
 import team.*;
-import comporator.*;
+import comparator.*;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
