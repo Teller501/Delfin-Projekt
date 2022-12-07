@@ -16,6 +16,7 @@ public class UserInterface {
     private Controller controller = new Controller();
     private Scanner scanner = new Scanner(System.in);
     public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_RED = "\033[0;31m";
     public static final String ANSI_RESET = "\u001B[0m";
     public enum Profession {
         CHAIRMAN,
@@ -427,13 +428,13 @@ public class UserInterface {
         }else{
             // For loop that loops through every member in arrear and printing out how much they owe
             System.out.println("Der er i øjeblikket registreret " + membersInArrear.size() + " medlem" + (membersInArrear.size() == 1 ? "" : "mer") + " i restance");
+            System.out.printf("--------------------------------------------------------%n");
+            System.out.printf(ANSI_BLUE + "| %-18s | %-18s | %14s | %n", "NAVN", "KONTINGENTBETALING", "SKYLDER" + ANSI_RESET);
+            System.out.printf("--------------------------------------------------------%n");
 
-            System.out.println("------------------------------------");
             for (Member member : controller.getMembersInArrear()){
-                System.out.println("Medlem: " + member.getName());
-                System.out.println("Kontingentbetaling: " + member.getContributionPrice() +"kr.");
-                System.out.println("Skylder: " + member.getOwes() + "kr.");
-                System.out.println("------------------------------------");
+                System.out.printf("| %-18s | %-18s | %14s | %n",member.getName() ,member.getContributionPrice() + " kr.", ANSI_RED + member.getOwes() + " kr." + ANSI_RESET);
+                System.out.printf("--------------------------------------------------------%n");
             }
         }
     }
