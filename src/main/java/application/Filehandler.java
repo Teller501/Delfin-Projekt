@@ -47,8 +47,8 @@ public class Filehandler {
         teamOutput.flush();
     }
 
-    public void loadData(ArrayList<Member> members, ArrayList<Team> teams) throws FileNotFoundException {
-        // Clear list of names before load:
+    public void loadMemberData(ArrayList<Member> members) throws FileNotFoundException {
+        // Clear list of data before load:
         members.clear();
         Scanner readerMember = new Scanner(new File("data/members.csv"));
 
@@ -58,7 +58,10 @@ public class Filehandler {
             members.add(dataMemberObjekt);
             System.out.println(memberLine);
         }
+    }
 
+    public void loadTeamData(ArrayList<Team> teams) throws FileNotFoundException {
+        // Clear list of data before load:
         teams.clear();
         Scanner readerTeams = new Scanner(new File("data/teams.csv"));
 
@@ -96,7 +99,6 @@ public class Filehandler {
             Team dataObjekt = new Team();
             dataObjekt.setName(parts[0]);
             dataObjekt.setDisciplin(parts[1]);
-            dataObjekt.setMembers(dataObjekt.getMembers());
             return dataObjekt;
 
         }catch(NumberFormatException e ){

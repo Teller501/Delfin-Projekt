@@ -43,7 +43,8 @@ public class Controller {
     // Calls the load method from FileHandler Class
     public void loadData() {
         try {
-            fileHandler.loadData(database.getMembers(), database.getTeams());
+            fileHandler.loadMemberData(database.getMembers());
+            fileHandler.loadTeamData(database.getTeams());
         } catch (FileNotFoundException e) {// if the file does not exist
             System.out.println("Filen findes ikke...");
         }
@@ -72,11 +73,6 @@ public class Controller {
     public void addMemberToTeam(Team teamChosen, Member memberChosen) {
         database.addMemberToTeam(teamChosen, memberChosen);
     }
-
- /*   public void addMemberToTeam(Team.Team team, Member.Member member){
-        team.addMember(member);
-        isChanges();
-    }*/
 
     public void addTrainingResult(Member member, LocalDate date, double time, Team team){
         database.addTrainingResult(member,date,time,team);

@@ -12,7 +12,7 @@ public class Team {
 
     private ArrayList<Result> trainingResults = new ArrayList<>();
     private ArrayList<Result> competitionResults = new ArrayList<>();
-    private ArrayList<Member> members = new ArrayList<>();
+    private ArrayList<Member> teamMembers = new ArrayList<>();
 
     public Team(String name, String disciplin){
         this.name = name;
@@ -23,12 +23,12 @@ public class Team {
 
     }
 
-    public ArrayList<Member> getMembers() {
-        return members;
+    public ArrayList<Member> getTeamMembers() {
+        return teamMembers;
     }
 
     public void addMember(Member member){
-        members.add(member);
+        teamMembers.add(member);
     }
 
     public String getName() {
@@ -47,8 +47,8 @@ public class Team {
         this.disciplin = disciplin;
     }
 
-    public void setMembers(ArrayList<Member> members) {
-        this.members = members;
+    public void setTeamMembers(ArrayList<Member> teamMembers) {
+        this.teamMembers = teamMembers;
     }
 
     public void addTrainingResult(Member member, LocalDate date, double time){
