@@ -537,11 +537,11 @@ public class UserInterface {
                 System.out.println("Hold: " + team.getName());
                 System.out.println("Disciplin: " + team.getDisciplin());
                 System.out.print("Medlemmer: ");
-                if (team.getMembers().isEmpty()){
+                if (team.getTeamMembers().isEmpty()){
                     System.out.println("Ingen medlemmer tilføjet til " + team.getName());
                 }else{
-                    for (Member member : team.getMembers()){
-                        System.out.print(member.getName() + (team.getMembers().size()<=1?"":", "));
+                    for (Member member : team.getTeamMembers()){
+                        System.out.print(member.getName() + (team.getTeamMembers().size()<=1?"":", "));
                     }
                     System.out.println();
                 }
@@ -635,8 +635,8 @@ public class UserInterface {
 
     private Member getMember(Team teamChosen) {
         int memberIndex = 1;
-        if (!teamChosen.getMembers().isEmpty()){
-            for (Member member : teamChosen.getMembers()){
+        if (!teamChosen.getTeamMembers().isEmpty()){
+            for (Member member : teamChosen.getTeamMembers()){
                 System.out.println(memberIndex++ + ": " + member.getName());
             }
         }else{
@@ -645,7 +645,7 @@ public class UserInterface {
 
         System.out.println("Vælg medlemmet du vil tilføje et resultat til: ");
         int memberChoice = Integer.parseInt(scanner.nextLine());
-        Member memberChosen = teamChosen.getMembers().get(memberChoice-1);
+        Member memberChosen = teamChosen.getTeamMembers().get(memberChoice-1);
         return memberChosen;
     }
 
