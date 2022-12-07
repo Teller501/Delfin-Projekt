@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import team.*;
+import team.*;
+import member.Result;
 
 public class Database {
     private ArrayList<Member> members = new ArrayList<>();
@@ -92,6 +94,14 @@ public class Database {
 
     public void addCompetitionResult(Member member, LocalDate date, double time, String convention, int placement, Team team){
         team.addCompetitionResult(member,date,time,convention,placement);
+    }
+
+    public ArrayList<Result> getTrainingResults(Team team){
+        return team.getTrainingResults();
+    }
+
+    public ArrayList<Result> getCompetitionResults(Team team){
+        return team.getCompetitionResults();
     }
 
 }
