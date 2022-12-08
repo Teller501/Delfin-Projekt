@@ -38,12 +38,7 @@ public class Contribution {
     // Calculates if the member is in arrear
     public boolean isArrear(){
         int yearsBetweeen = (int) ChronoUnit.YEARS.between(member.getRegisterDate(), LocalDate.now());
-
-        if (yearsBetweeen > 1){
-            arrear = true;
-        }else{
-            arrear = false;
-        }
+        arrear = yearsBetweeen > 1;
         return arrear;
     }
 

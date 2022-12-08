@@ -8,8 +8,6 @@ import java.util.ArrayList;
 public class Team {
     private String name;
     private String disciplin;
-//  private Team.Trainer trainer; // TODO : Lav træner klasse
-
     private ArrayList<Result> trainingResults = new ArrayList<>();
     private ArrayList<Result> competitionResults = new ArrayList<>();
     private ArrayList<Member> teamMembers = new ArrayList<>();
