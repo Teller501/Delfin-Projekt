@@ -102,7 +102,7 @@ public class UserInterface {
 
                             switch (menuInput) {
                                 case 1 -> registerMember();
-                                case 2 -> printMembers();
+                                case 2 -> viewMembers();
                                 case 3 -> searchForMember();
                                 case 4 -> editMember();
                                 case 5 -> deleteMember();
@@ -141,7 +141,7 @@ public class UserInterface {
                                 case 1 -> viewTeams();
                                 case 2 -> addMemberToTeam();
                                 case 3 -> addResult();
-                                case 4 -> getTop5();
+                                case 4 -> viewTop5Results();
 
                                 case 7 -> saveData();
                                 case 8 -> printWelcome();
@@ -233,7 +233,7 @@ public class UserInterface {
         controller.registerMember(name, birthday, registerDate, isActive, phoneNumber);
     }
 
-    private void printMembers() {
+    private void viewMembers() {
         if (!controller.getMembers().isEmpty()) {
             System.out.printf("-----------------------------------------------------------------------------------------------%n");
             System.out.printf(ANSI_BLUE + "| %-18s | %-10s | %8s | %13s | %12s | %15s | %n", "NAVN", "FØDSELSDAG", "TLF","MEDLEMSTYPE", "MEDLEMSSKAB", "INDMELDINGSDATO" + ANSI_RESET);
@@ -586,7 +586,7 @@ public class UserInterface {
         }
     }
 
-    private void getTop5(){
+    private void viewTop5Results(){
         Team team = getTeam("Vælg det hold du vil se top 5 resultater for: ");
         ArrayList<Result> sortedTrainingResults = controller.sortTrainingResults(team);
         ArrayList<Result> sortedCompetitionResults = controller.sortCompetitionResults(team);
@@ -607,7 +607,7 @@ public class UserInterface {
             System.out.println("Bedste 5 konkurrenceresultater for " + team.getName());
             for(int i = 0; i< 5; i++){
                 Result result = sortedCompetitionResults.get(i);
-                System.out.println(result.getMember().getName() + " " + result.getTime() + " " + result.getDate());
+                System.out.println(result.getMember().getName() + " " + result.getTime() + " " + result.getConvention() + " " + result.getPlacement() + " " + result.getDate());
             }
         }else{
             System.out.println("Der er ingen konkurrenceresultater på " + team.getName());
