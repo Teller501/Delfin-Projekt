@@ -79,12 +79,14 @@ public class Member {
         this.registerDate = registerDate;
     }
 
+    // Calculating members age from their birthday to the current date
     public int calculateAge(){
         LocalDate today = LocalDate.now();
         int age = (int) ChronoUnit.YEARS.between(birthday,today);
         return age;
     }
 
+    // Calculating what type the member is based of member age
     public MemberType calculateMemberType(){
         if (calculateAge() < 18){
             return Member.MemberType.JUNIOR_SWIMMER;

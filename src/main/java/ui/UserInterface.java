@@ -233,6 +233,7 @@ public class UserInterface {
         controller.registerMember(name, birthday, registerDate, isActive, phoneNumber);
     }
 
+    // Printing out all members in the system
     private void viewMembers() {
         if (!controller.getMembers().isEmpty()) {
             System.out.printf("-----------------------------------------------------------------------------------------------%n");
@@ -255,6 +256,7 @@ public class UserInterface {
         }
     }
 
+    // Method for searching and printing a specific member
     private void searchForMember() {
         System.out.println("Indtast søgeord: ");
         String searchTerm = scanner.nextLine();
@@ -295,11 +297,13 @@ public class UserInterface {
         }
     }
 
+    // Loading saved data from csv files
     private void loadData() {
         controller.loadData();
         System.out.println("Data er nu opdateret...");
     }
 
+    // Saving changed data to csv files
     private void saveData() {
         if (controller.isChanges()) {
             controller.saveData();
@@ -309,6 +313,7 @@ public class UserInterface {
         }
     }
 
+    // Searching and editing a specific member
     private void editMember() {
 
         System.out.println("Indtast søgeord: ");
@@ -376,6 +381,7 @@ public class UserInterface {
         }
     }
 
+    // Searching and deleting specific member
     public void deleteMember() {
         System.out.println("------------------------------------");
         System.out.println("Indtast søgeord: ");
@@ -420,6 +426,7 @@ public class UserInterface {
         }
     }
 
+    // Printing out all members who owes the swimclub
     private void viewMembersInArrear(){
         ArrayList<Member> membersInArrear = controller.getMembersInArrear();
 
@@ -439,6 +446,7 @@ public class UserInterface {
         }
     }
 
+    // Printing out all the teams in the system
     private void viewTeams(){
         ArrayList<Team> teams = controller.getTeams();
 
@@ -466,6 +474,7 @@ public class UserInterface {
         }
     }
 
+    // Searching and adding member to a team
     private void addMemberToTeam(){
         System.out.println("Indtast søgeord for medlemmet du vil tilføje til et hold: ");
         String searchTerm = scanner.nextLine();
@@ -586,6 +595,7 @@ public class UserInterface {
         }
     }
 
+    // Getting the top 5 times from members at a specific team
     private void viewTop5Results(){
         Team team = getTeam("Vælg det hold du vil se top 5 resultater for: ");
         ArrayList<Result> sortedTrainingResults = controller.sortTrainingResults(team);
